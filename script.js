@@ -584,10 +584,77 @@ function openDetail(type, index) {
 }
 
 function initInteractions() {
+  const floatingContact = document.querySelector('.floating-contact');
+  const floatingContactBtn = byId('floatingContactBtn');
+  const floatingContactMenu = byId('floatingContactMenu');
+  const floatingContactHideBtn = byId('floatingContactHideBtn');
+  const floatingContactRestore = byId('floatingContactRestore');
+  const otherExperienceBlock = byId('otherExperienceBlock');
+  const otherExperienceToggle = byId('otherExperienceToggle');
+  const CONTACT_HIDDEN_KEY = 'floatingContactHidden';
+  const setFloatingMenuOpen = (open) => {
+    if (!floatingContactMenu || !floatingContactBtn) return;
+    floatingContactMenu.classList.toggle('open', open);
+    floatingContactBtn.setAttribute('aria-expanded', String(open));
+    floatingContactBtn.classList.toggle('is-open', open);
+    floatingContactBtn.setAttribute('aria-label', open ? 'Close contact links' : 'Open contact links');
+  };
+
+  const setFloatingContactHidden = (hidden) => {
+    if (!floatingContact || !floatingContactRestore) return;
+    floatingContact.style.display = hidden ? 'none' : '';
+    floatingContactRestore.hidden = !hidden;
+    if (floatingContactMenu && floatingContactBtn) {
+      setFloatingMenuOpen(false);
+    }
+    try {
+      window.localStorage.setItem(CONTACT_HIDDEN_KEY, hidden ? '1' : '0');
+    } catch (_error) {
+      // Ignore storage access errors (private mode / blocked storage).
+    }
+  };
+
+  try {
+    const stored = window.localStorage.getItem(CONTACT_HIDDEN_KEY);
+    if (stored === '1') setFloatingContactHidden(true);
+  } catch (_error) {
+    // Ignore storage access errors (private mode / blocked storage).
+  }
+
+  if (floatingContactHideBtn) {
+    floatingContactHideBtn.addEventListener('click', () => {
+      setFloatingContactHidden(true);
+    });
+  }
+
+  if (floatingContactRestore) {
+    floatingContactRestore.addEventListener('click', () => {
+      setFloatingContactHidden(false);
+    });
+  }
+
+  if (otherExperienceBlock && otherExperienceToggle) {
+    otherExperienceToggle.addEventListener('click', () => {
+      const collapsed = otherExperienceBlock.classList.toggle('collapsed');
+      otherExperienceToggle.setAttribute('aria-expanded', String(!collapsed));
+    });
+  }
+
   document.addEventListener('click', (event) => {
     const btn = event.target.closest('button');
     if (btn && btn.dataset.type) {
       openDetail(btn.dataset.type, Number(btn.dataset.index));
+    }
+
+    if (floatingContactBtn && floatingContactMenu) {
+      if (event.target.closest('#floatingContactBtn')) {
+        const open = !floatingContactMenu.classList.contains('open');
+        setFloatingMenuOpen(open);
+      } else if (event.target.closest('#floatingContactMenu a')) {
+        setFloatingMenuOpen(false);
+      } else if (!event.target.closest('.floating-contact')) {
+        setFloatingMenuOpen(false);
+      }
     }
 
     const mobileMenuBtn = byId('mobileMenuBtn');
@@ -616,7 +683,9 @@ function initViewNavigation() {
   const sections = Array.from(document.querySelectorAll('.view-section'));
   const sectionMap = new Map(sections.map((section) => [section.id, section]));
   let currentIndex = 0;
-  let wheelLock = false;
+  let navLock = false;
+  let touchStartY = 0;
+  let touchEndY = 0;
 
   const setActiveView = (id) => {
     const normalizedId = id === 'overview' ? 'home' : id;
@@ -634,7 +703,7 @@ function initViewNavigation() {
   };
 
   const onBoundaryScroll = (event) => {
-    if (wheelLock) return;
+    if (navLock) return;
     if (byId('detailPanel')?.open) return;
 
     const activeSection = sections[currentIndex];
@@ -649,17 +718,57 @@ function initViewNavigation() {
 
     if (delta > 0 && atBottom) {
       event.preventDefault();
-      wheelLock = true;
+      navLock = true;
       setActiveViewByIndex(currentIndex + 1);
       setTimeout(() => {
-        wheelLock = false;
+        navLock = false;
       }, 260);
     } else if (delta < 0 && atTop) {
       event.preventDefault();
-      wheelLock = true;
+      navLock = true;
       setActiveViewByIndex(currentIndex - 1);
       setTimeout(() => {
-        wheelLock = false;
+        navLock = false;
+      }, 260);
+    }
+  };
+
+  const onTouchStart = (event) => {
+    if (event.touches.length !== 1) return;
+    touchStartY = event.touches[0].clientY;
+    touchEndY = touchStartY;
+  };
+
+  const onTouchMove = (event) => {
+    if (event.touches.length !== 1) return;
+    touchEndY = event.touches[0].clientY;
+  };
+
+  const onTouchEnd = (event) => {
+    if (navLock) return;
+    if (byId('detailPanel')?.open) return;
+
+    const activeSection = sections[currentIndex];
+    if (!activeSection || event.currentTarget !== activeSection) return;
+
+    const deltaY = touchStartY - touchEndY;
+    if (Math.abs(deltaY) < 40) return;
+
+    const atTop = activeSection.scrollTop <= 0;
+    const atBottom =
+      activeSection.scrollTop + activeSection.clientHeight >= activeSection.scrollHeight - 1;
+
+    if (deltaY > 0 && atBottom) {
+      navLock = true;
+      setActiveViewByIndex(currentIndex + 1);
+      setTimeout(() => {
+        navLock = false;
+      }, 260);
+    } else if (deltaY < 0 && atTop) {
+      navLock = true;
+      setActiveViewByIndex(currentIndex - 1);
+      setTimeout(() => {
+        navLock = false;
       }, 260);
     }
   };
@@ -677,6 +786,9 @@ function initViewNavigation() {
   });
   sections.forEach((section) => {
     section.addEventListener('wheel', onBoundaryScroll, { passive: false });
+    section.addEventListener('touchstart', onTouchStart, { passive: true });
+    section.addEventListener('touchmove', onTouchMove, { passive: true });
+    section.addEventListener('touchend', onTouchEnd, { passive: true });
   });
 
   setActiveView(window.location.hash.replace('#', '') || 'home');

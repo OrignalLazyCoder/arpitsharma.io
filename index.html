@@ -74,6 +74,41 @@
         <button class="mobile-view-item" data-view-target="contact">Contact</button>
       </nav>
     </header>
+    <aside class="floating-contact" aria-label="Quick contact">
+      <div class="floating-contact-menu" id="floatingContactMenu">
+        <a href="mailto:hello@arpitsharma.io" aria-label="Email">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+        </a>
+        <a href="https://t.me/arpitsharmadev" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+        </a>
+        <a href="https://linkedin.com/in/lazycoderr" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+        </a>
+        <button type="button" id="floatingContactHideBtn" aria-label="Hide contact actions">
+          <i class="fa-solid fa-eye-slash" aria-hidden="true"></i>
+        </button>
+      </div>
+      <button
+        class="floating-contact-btn"
+        id="floatingContactBtn"
+        aria-expanded="false"
+        aria-controls="floatingContactMenu"
+        aria-label="Open contact links"
+      >
+        <i class="fa-solid fa-paper-plane icon-open" aria-hidden="true"></i>
+        <i class="fa-solid fa-xmark icon-close" aria-hidden="true"></i>
+      </button>
+    </aside>
+    <button
+      type="button"
+      class="floating-contact-restore"
+      id="floatingContactRestore"
+      aria-label="Show contact actions"
+      hidden
+    >
+      <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+    </button>
 
     <main id="main" class="view-main">
       <section id="home" class="hero section view-section active" data-panel>
@@ -117,8 +152,17 @@
         </div>
         <h2>Experience</h2>
         <div class="card-grid" id="experienceGrid"></div>
-        <div class="other-experience-block">
-          <h3>Other Experiences</h3>
+        <div class="other-experience-block collapsed" id="otherExperienceBlock">
+          <button
+            class="other-experience-toggle"
+            id="otherExperienceToggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="otherExperienceGrid"
+          >
+            <span>Other Experiences</span>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          </button>
           <div class="card-grid" id="otherExperienceGrid"></div>
         </div>
       </section>

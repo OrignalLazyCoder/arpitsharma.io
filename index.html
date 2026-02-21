@@ -43,16 +43,7 @@
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="app-header">
-      <p class="app-brand">Arpit Sharma</p>
-      <button
-        class="mobile-menu-btn"
-        id="mobileMenuBtn"
-        aria-expanded="false"
-        aria-controls="mobileViewMenu"
-        aria-label="Toggle menu"
-      >
-        <span></span><span></span><span></span>
-      </button>
+      <p class="app-brand">Arpit Sharma - Systems Architect</p>
       <nav class="view-nav" aria-label="Section navigation">
         <button class="view-tab" data-view-target="home" aria-pressed="true">Home</button>
         <button class="view-tab" data-view-target="experience" aria-pressed="false">Experience</button>
@@ -62,16 +53,6 @@
         <button class="view-tab" data-view-target="testimonials" aria-pressed="false">Recommendations</button>
         <button class="view-tab" data-view-target="tech" aria-pressed="false">Tech Stack</button>
         <button class="view-tab" data-view-target="contact" aria-pressed="false">Contact</button>
-      </nav>
-      <nav class="mobile-view-menu" id="mobileViewMenu" aria-label="Mobile section navigation">
-        <button class="mobile-view-item" data-view-target="home">Home</button>
-        <button class="mobile-view-item" data-view-target="experience">Experience</button>
-        <button class="mobile-view-item" data-view-target="systems">Projects</button>
-        <button class="mobile-view-item" data-view-target="capabilities">Capabilities</button>
-        <button class="mobile-view-item" data-view-target="leadership">Leadership</button>
-        <button class="mobile-view-item" data-view-target="testimonials">Recommendations</button>
-        <button class="mobile-view-item" data-view-target="tech">Tech Stack</button>
-        <button class="mobile-view-item" data-view-target="contact">Contact</button>
       </nav>
     </header>
     <aside class="floating-contact" aria-label="Quick contact">
@@ -85,9 +66,6 @@
         <a href="https://linkedin.com/in/lazycoderr" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
           <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
         </a>
-        <button type="button" id="floatingContactHideBtn" aria-label="Hide contact actions">
-          <i class="fa-solid fa-eye-slash" aria-hidden="true"></i>
-        </button>
       </div>
       <button
         class="floating-contact-btn"
@@ -100,15 +78,16 @@
         <i class="fa-solid fa-xmark icon-close" aria-hidden="true"></i>
       </button>
     </aside>
-    <button
-      type="button"
-      class="floating-contact-restore"
-      id="floatingContactRestore"
-      aria-label="Show contact actions"
-      hidden
-    >
-      <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-    </button>
+    <nav class="mobile-bottom-nav" aria-label="Mobile section navigation">
+      <button class="mobile-bottom-item" data-view-target="home" aria-pressed="true">Home</button>
+      <button class="mobile-bottom-item" data-view-target="experience" aria-pressed="false">Experience</button>
+      <button class="mobile-bottom-item" data-view-target="systems" aria-pressed="false">Projects</button>
+      <button class="mobile-bottom-item" data-view-target="capabilities" aria-pressed="false">Capabilities</button>
+      <button class="mobile-bottom-item" data-view-target="leadership" aria-pressed="false">Leadership</button>
+      <button class="mobile-bottom-item" data-view-target="testimonials" aria-pressed="false">Recommendations</button>
+      <button class="mobile-bottom-item" data-view-target="tech" aria-pressed="false">Tech Stack</button>
+      <button class="mobile-bottom-item" data-view-target="contact" aria-pressed="false">Contact</button>
+    </nav>
 
     <main id="main" class="view-main">
       <section id="home" class="hero section view-section active" data-panel>

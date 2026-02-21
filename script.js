@@ -584,14 +584,10 @@ function openDetail(type, index) {
 }
 
 function initInteractions() {
-  const floatingContact = document.querySelector('.floating-contact');
   const floatingContactBtn = byId('floatingContactBtn');
   const floatingContactMenu = byId('floatingContactMenu');
-  const floatingContactHideBtn = byId('floatingContactHideBtn');
-  const floatingContactRestore = byId('floatingContactRestore');
   const otherExperienceBlock = byId('otherExperienceBlock');
   const otherExperienceToggle = byId('otherExperienceToggle');
-  const CONTACT_HIDDEN_KEY = 'floatingContactHidden';
   const setFloatingMenuOpen = (open) => {
     if (!floatingContactMenu || !floatingContactBtn) return;
     floatingContactMenu.classList.toggle('open', open);
@@ -599,39 +595,6 @@ function initInteractions() {
     floatingContactBtn.classList.toggle('is-open', open);
     floatingContactBtn.setAttribute('aria-label', open ? 'Close contact links' : 'Open contact links');
   };
-
-  const setFloatingContactHidden = (hidden) => {
-    if (!floatingContact || !floatingContactRestore) return;
-    floatingContact.style.display = hidden ? 'none' : '';
-    floatingContactRestore.hidden = !hidden;
-    if (floatingContactMenu && floatingContactBtn) {
-      setFloatingMenuOpen(false);
-    }
-    try {
-      window.localStorage.setItem(CONTACT_HIDDEN_KEY, hidden ? '1' : '0');
-    } catch (_error) {
-      // Ignore storage access errors (private mode / blocked storage).
-    }
-  };
-
-  try {
-    const stored = window.localStorage.getItem(CONTACT_HIDDEN_KEY);
-    if (stored === '1') setFloatingContactHidden(true);
-  } catch (_error) {
-    // Ignore storage access errors (private mode / blocked storage).
-  }
-
-  if (floatingContactHideBtn) {
-    floatingContactHideBtn.addEventListener('click', () => {
-      setFloatingContactHidden(true);
-    });
-  }
-
-  if (floatingContactRestore) {
-    floatingContactRestore.addEventListener('click', () => {
-      setFloatingContactHidden(false);
-    });
-  }
 
   if (otherExperienceBlock && otherExperienceToggle) {
     otherExperienceToggle.addEventListener('click', () => {
@@ -657,19 +620,6 @@ function initInteractions() {
       }
     }
 
-    const mobileMenuBtn = byId('mobileMenuBtn');
-    const mobileViewMenu = byId('mobileViewMenu');
-    if (mobileMenuBtn && mobileViewMenu) {
-      if (event.target.closest('#mobileMenuBtn')) {
-        const open = mobileViewMenu.classList.toggle('open');
-        mobileMenuBtn.setAttribute('aria-expanded', String(open));
-        return;
-      }
-      if (!event.target.closest('#mobileViewMenu')) {
-        mobileViewMenu.classList.remove('open');
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-      }
-    }
   });
 
   const panel = byId('detailPanel');
@@ -679,116 +629,35 @@ function initInteractions() {
 }
 
 function initViewNavigation() {
-  const tabs = Array.from(document.querySelectorAll('.view-tab, .mobile-view-item'));
+  const tabs = Array.from(document.querySelectorAll('.view-tab, .mobile-bottom-item'));
   const sections = Array.from(document.querySelectorAll('.view-section'));
   const sectionMap = new Map(sections.map((section) => [section.id, section]));
   let currentIndex = 0;
-  let navLock = false;
-  let touchStartY = 0;
-  let touchEndY = 0;
+
+  const setTabState = (targetId) => {
+    tabs.forEach((tab) => {
+      const isActive = tab.dataset.viewTarget === targetId;
+      tab.setAttribute('aria-pressed', String(isActive));
+      if (isActive && tab.classList.contains('mobile-bottom-item')) {
+        tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    });
+  };
 
   const setActiveView = (id) => {
     const normalizedId = id === 'overview' ? 'home' : id;
     const targetId = sectionMap.has(normalizedId) ? normalizedId : 'home';
     currentIndex = sections.findIndex((section) => section.id === targetId);
     sections.forEach((section) => section.classList.toggle('active', section.id === targetId));
-    tabs.forEach((tab) => tab.setAttribute('aria-pressed', String(tab.dataset.viewTarget === targetId)));
+    setTabState(targetId);
     const targetSection = sectionMap.get(targetId);
     if (targetSection) targetSection.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const setActiveViewByIndex = (index) => {
-    if (index < 0 || index >= sections.length || index === currentIndex) return;
-    setActiveView(sections[index].id);
-  };
-
-  const onBoundaryScroll = (event) => {
-    if (navLock) return;
-    if (byId('detailPanel')?.open) return;
-
-    const activeSection = sections[currentIndex];
-    if (!activeSection || event.currentTarget !== activeSection) return;
-
-    const delta = event.deltaY;
-    if (Math.abs(delta) < 18) return;
-
-    const atTop = activeSection.scrollTop <= 0;
-    const atBottom =
-      activeSection.scrollTop + activeSection.clientHeight >= activeSection.scrollHeight - 1;
-
-    if (delta > 0 && atBottom) {
-      event.preventDefault();
-      navLock = true;
-      setActiveViewByIndex(currentIndex + 1);
-      setTimeout(() => {
-        navLock = false;
-      }, 260);
-    } else if (delta < 0 && atTop) {
-      event.preventDefault();
-      navLock = true;
-      setActiveViewByIndex(currentIndex - 1);
-      setTimeout(() => {
-        navLock = false;
-      }, 260);
-    }
-  };
-
-  const onTouchStart = (event) => {
-    if (event.touches.length !== 1) return;
-    touchStartY = event.touches[0].clientY;
-    touchEndY = touchStartY;
-  };
-
-  const onTouchMove = (event) => {
-    if (event.touches.length !== 1) return;
-    touchEndY = event.touches[0].clientY;
-  };
-
-  const onTouchEnd = (event) => {
-    if (navLock) return;
-    if (byId('detailPanel')?.open) return;
-
-    const activeSection = sections[currentIndex];
-    if (!activeSection || event.currentTarget !== activeSection) return;
-
-    const deltaY = touchStartY - touchEndY;
-    if (Math.abs(deltaY) < 40) return;
-
-    const atTop = activeSection.scrollTop <= 0;
-    const atBottom =
-      activeSection.scrollTop + activeSection.clientHeight >= activeSection.scrollHeight - 1;
-
-    if (deltaY > 0 && atBottom) {
-      navLock = true;
-      setActiveViewByIndex(currentIndex + 1);
-      setTimeout(() => {
-        navLock = false;
-      }, 260);
-    } else if (deltaY < 0 && atTop) {
-      navLock = true;
-      setActiveViewByIndex(currentIndex - 1);
-      setTimeout(() => {
-        navLock = false;
-      }, 260);
-    }
   };
 
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       setActiveView(tab.dataset.viewTarget);
-      const mobileViewMenu = byId('mobileViewMenu');
-      const mobileMenuBtn = byId('mobileMenuBtn');
-      if (mobileViewMenu && mobileMenuBtn) {
-        mobileViewMenu.classList.remove('open');
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-      }
     });
-  });
-  sections.forEach((section) => {
-    section.addEventListener('wheel', onBoundaryScroll, { passive: false });
-    section.addEventListener('touchstart', onTouchStart, { passive: true });
-    section.addEventListener('touchmove', onTouchMove, { passive: true });
-    section.addEventListener('touchend', onTouchEnd, { passive: true });
   });
 
   setActiveView(window.location.hash.replace('#', '') || 'home');

@@ -58,8 +58,7 @@ a {
   white-space: nowrap;
 }
 
-.mobile-menu-btn,
-.mobile-view-menu {
+.mobile-bottom-nav {
   display: none;
 }
 
@@ -155,46 +154,6 @@ a {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
 }
 
-.floating-contact-menu button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border: 2px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--text);
-  font-size: 1rem;
-  padding: 0;
-  cursor: pointer;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
-}
-
-.floating-contact-restore {
-  position: fixed;
-  right: max(20px, env(safe-area-inset-right));
-  bottom: max(20px, env(safe-area-inset-bottom));
-  z-index: 95;
-  width: 48px;
-  height: 48px;
-  border: 2px solid var(--border);
-  border-radius: 999px;
-  background: var(--btn-bg);
-  color: var(--text);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.05rem;
-  padding: 0;
-  cursor: pointer;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
-}
-
-.floating-contact-restore[hidden] {
-  display: none !important;
-}
-
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -213,7 +172,7 @@ a {
   height: calc(100vh - 58px);
   max-width: 1160px;
   margin: 0 auto;
-  padding: 14px;
+  padding: 22px 14px 14px;
 }
 
 .section {
@@ -234,6 +193,7 @@ a {
   display: none;
   height: 100%;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .view-section.active {
@@ -251,6 +211,7 @@ a {
     transform: translateY(0);
   }
 }
+
 
 .panel-chrome {
   position: absolute;
@@ -664,77 +625,52 @@ h3 {
   .app-header {
     gap: 8px;
     padding: 10px;
-    justify-content: space-between;
-  }
-
-  .mobile-menu-btn {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 4px;
-    justify-content: center;
-    align-items: center;
-    width: 42px;
-    height: 36px;
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface-alt);
-    cursor: pointer;
-  }
-
-  .mobile-menu-btn span {
-    display: block;
-    width: 16px;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--text);
+    justify-content: flex-start;
   }
 
   .view-nav {
     display: none;
   }
 
-  .mobile-view-menu {
-    position: absolute;
-    top: calc(100% + 6px);
-    right: 10px;
+  .mobile-bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 90;
-    width: min(240px, calc(100vw - 20px));
-    border: 2px solid var(--border);
-    border-radius: 14px;
-    background: var(--surface-alt);
-    padding: 10px;
-  }
-
-  .mobile-view-menu:not(.open) {
-    display: none;
-  }
-
-  .mobile-view-menu.open {
     display: flex;
-    flex-direction: column;
+    overflow-x: auto;
     gap: 8px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    border-top: 2px solid var(--border);
+    background: var(--section-bg);
   }
 
-  .mobile-view-item {
+  .mobile-bottom-item {
+    flex: 0 0 auto;
     border: 2px solid var(--border);
     border-radius: 999px;
-    background: var(--surface);
+    background: var(--surface-alt);
     color: var(--text);
-    font-size: 0.88rem;
-    font-weight: 600;
-    text-align: left;
-    padding: 8px 12px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+    padding: 7px 12px;
     cursor: pointer;
   }
 
+  .mobile-bottom-item[aria-pressed='true'] {
+    background: var(--btn-bg);
+  }
+
   .view-main {
-    height: calc(100vh - 56px);
-    padding: 10px;
+    height: calc(100vh - 56px - 64px);
+    padding: 16px 10px 10px;
   }
 
   .floating-contact {
     right: max(14px, env(safe-area-inset-right));
-    bottom: max(14px, env(safe-area-inset-bottom));
+    bottom: max(82px, calc(env(safe-area-inset-bottom) + 68px));
   }
 
   .floating-contact-btn {
@@ -749,27 +685,13 @@ h3 {
     font-size: 0.92rem;
   }
 
-  .floating-contact-menu button {
-    width: 42px;
-    height: 42px;
-    font-size: 0.92rem;
-  }
-
-  .floating-contact-restore {
-    right: max(14px, env(safe-area-inset-right));
-    bottom: max(14px, env(safe-area-inset-bottom));
-    width: 44px;
-    height: 44px;
-    font-size: 0.96rem;
-  }
-
   .view-tab {
     font-size: 0.8rem;
     padding: 7px 10px;
   }
 
   .section {
-    padding: 62px 16px 20px;
+    padding: 62px 16px 210px;
   }
 
   .panel-chrome {

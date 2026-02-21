@@ -45,6 +45,7 @@ a {
   z-index: 80;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   padding: 10px 14px;
   border-bottom: 2px solid var(--border);
@@ -56,6 +57,16 @@ a {
   font-size: 0.95rem;
   font-weight: 700;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-brand img {
+  width: 18px;
+  height: 18px;
+  display: block;
+  border-radius: 4px;
 }
 
 .mobile-bottom-nav {
@@ -66,7 +77,8 @@ a {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  width: 100%;
+  width: auto;
+  margin-left: auto;
   padding-bottom: 2px;
 }
 
@@ -691,7 +703,7 @@ h3 {
   }
 
   .section {
-    padding: 62px 16px 210px;
+    padding: 56px 16px 132px;
   }
 
   .panel-chrome {

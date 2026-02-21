@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Arpit Sharma - Senior Systems Architect / Lead Engineer</title>
+  <desc id="desc">Architecture dossier covering distributed systems, reliability engineering, and platform design.</desc>
+
+  <rect width="1200" height="630" fill="#A7D3C0"/>
+
+  <rect x="54" y="54" width="1092" height="522" rx="22" fill="#E8E0CF" stroke="#4B4B4B" stroke-width="2"/>
+  <rect x="54" y="54" width="1092" height="60" rx="22" fill="#F2EBDD" stroke="#4B4B4B" stroke-width="2"/>
+  <line x1="54" y1="114" x2="1146" y2="114" stroke="#4B4B4B" stroke-width="2"/>
+
+  <circle cx="88" cy="84" r="7" fill="#F6E6A6" stroke="#4B4B4B" stroke-width="2"/>
+  <circle cx="111" cy="84" r="7" fill="#C6C8F5" stroke="#4B4B4B" stroke-width="2"/>
+  <circle cx="134" cy="84" r="7" fill="#F4C2C2" stroke="#4B4B4B" stroke-width="2"/>
+
+  <text x="1088" y="89" fill="#5A5A5A" font-family="Inter, Arial, sans-serif" font-size="18" text-anchor="end">system.profile</text>
+
+  <text x="90" y="220" fill="#2B2B2B" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700">Arpit Sharma</text>
+  <text x="90" y="280" fill="#2B2B2B" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600">Senior Systems Architect / Lead Engineer</text>
+  <rect x="90" y="368" width="210" height="38" rx="19" fill="#F2EBDD" stroke="#4B4B4B" stroke-width="2"/>
+  <text x="195" y="393" fill="#2B2B2B" font-family="Inter, Arial, sans-serif" font-size="18" text-anchor="middle">Distributed Systems</text>
+
+  <rect x="314" y="368" width="230" height="38" rx="19" fill="#F2EBDD" stroke="#4B4B4B" stroke-width="2"/>
+  <text x="429" y="393" fill="#2B2B2B" font-family="Inter, Arial, sans-serif" font-size="18" text-anchor="middle">Decentralized Systems</text>
+
+  <rect x="558" y="368" width="204" height="38" rx="19" fill="#F2EBDD" stroke="#4B4B4B" stroke-width="2"/>
+  <text x="660" y="393" fill="#2B2B2B" font-family="Inter, Arial, sans-serif" font-size="18" text-anchor="middle">Cloud Architecture</text>
+
+  <rect x="776" y="368" width="76" height="38" rx="19" fill="#F2EBDD" stroke="#4B4B4B" stroke-width="2"/>
+  <text x="814" y="393" fill="#2B2B2B" font-family="Inter, Arial, sans-serif" font-size="18" text-anchor="middle">IoT</text>
+
+  <rect x="866" y="368" width="168" height="38" rx="19" fill="#F2EBDD" stroke="#4B4B4B" stroke-width="2"/>
+  <text x="950" y="393" fill="#2B2B2B" font-family="Inter, Arial, sans-serif" font-size="18" text-anchor="middle">Web at Scale</text>
+
+  <text x="90" y="510" fill="#5A5A5A" font-family="Inter, Arial, sans-serif" font-size="24">arpitsharma.io</text>
+</svg>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arpit Sharma — Senior Systems Architect / Lead Engineer</title>
+    <meta
+      name="description"
+      content="Professional architecture dossier for senior systems architecture and lead engineering roles."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#overview">Arpit Sharma</a>
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#systems">Architecture & Systems</a></li>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#leadership">Leadership & Approach</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><button class="text-link" data-action="resume">Download Resume</button></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero section">
+        <p class="eyebrow">Senior Systems Architect / Lead Engineer</p>
+        <h1>Arpit Sharma</h1>
+        <p class="hero-subhead">
+          Designing reliable, scalable systems across backend, cloud infrastructure, and real-world platforms.
+        </p>
+        <p class="body-copy">
+          Lead engineer with 7+ years of experience building distributed systems, cloud-native applications, and
+          performance-critical software. Hands-on architect with end-to-end ownership from design through production
+          operation.
+        </p>
+        <div class="tags" id="heroTags"></div>
+        <div class="cta-row">
+          <a class="btn" href="#experience">View Experience</a>
+          <button class="btn" data-action="resume">Download Resume</button>
+          <a class="btn" href="#contact">Contact</a>
+        </div>
+      </section>
+
+      <section id="overview" class="section">
+        <h2>Engineering systems that operate correctly at scale</h2>
+        <p class="body-copy">
+          I specialize in designing and implementing production systems that remain stable under growth, complexity,
+          and real-world constraints. My work spans backend services, cloud infrastructure, developer tooling, and
+          hardware-integrated platforms.
+        </p>
+        <p class="body-copy">
+          I operate at the intersection of architecture and implementation — defining system structure while remaining
+          hands-on in critical components to ensure design integrity.
+        </p>
+      </section>
+
+      <section id="experience" class="section">
+        <h2>Experience</h2>
+        <div class="card-grid" id="experienceGrid"></div>
+      </section>
+
+      <section id="systems" class="section">
+        <h2>Selected systems demonstrating engineering depth</h2>
+        <div class="card-grid" id="systemsGrid"></div>
+      </section>
+
+      <section id="capabilities" class="section">
+        <h2>Capabilities</h2>
+        <div class="card-grid" id="capabilitiesGrid"></div>
+      </section>
+
+      <section id="leadership" class="section">
+        <h2>Leadership & Approach</h2>
+        <div class="card-grid" id="leadershipGrid"></div>
+      </section>
+
+      <section id="principles" class="section">
+        <h2>Engineering Principles</h2>
+        <ul class="list" id="principlesList"></ul>
+      </section>
+
+      <section id="education" class="section">
+        <h2>Education</h2>
+        <p class="body-copy">B.Tech — Computer Science and Engineering</p>
+        <p class="body-copy muted">Dr. A.P.J. Abdul Kalam Technical University</p>
+        <p class="body-copy muted">2016 — 2020</p>
+      </section>
+
+      <section id="tech" class="section">
+        <h2>Technology Stack</h2>
+        <div class="card-grid" id="techGrid"></div>
+      </section>
+
+      <section id="contact" class="section">
+        <h2>Open to senior engineering roles involving system architecture or large-scale infrastructure.</h2>
+        <div class="card">
+          <p><strong>Email:</strong> <a href="mailto:arpitsharma.dev@proton.me">arpitsharma.dev@proton.me</a></p>
+          <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/lazycoderr">linkedin.com/in/lazycoderr</a></p>
+          <p><strong>Telegram:</strong> <a href="https://t.me/arpitsharmadev">t.me/arpitsharmadev</a></p>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="detailPanel" class="detail-panel" aria-labelledby="detailTitle">
+      <button class="close-btn" id="closeDetail" aria-label="Close details">Close</button>
+      <article id="detailBody"></article>
+    </dialog>
+
+    <dialog id="resumeModal" class="resume-modal" aria-labelledby="resumeTitle">
+      <button class="close-btn" id="closeResume" aria-label="Close resume">Close</button>
+      <h2 id="resumeTitle">Resume Download</h2>
+      <p class="body-copy">
+        Add your PDF resume as <code>resume.pdf</code> in this folder to enable direct download.
+      </p>
+      <a class="btn" href="resume.pdf" download>Download resume.pdf</a>
+    </dialog>
+
+    <div class="palette" id="palette" hidden>
+      <div class="palette-inner">
+        <input id="paletteInput" type="text" placeholder="Type to jump to a section..." aria-label="Command palette" />
+        <ul id="paletteList"></ul>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

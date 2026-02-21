@@ -75,6 +75,37 @@ const content = {
       }
     },
     {
+      title: 'Founding Engineer — 4 startups till now',
+      summary: [
+        'Built and launched core product systems as an early engineering hire across four startup environments',
+        'Took ownership of architecture, backend implementation, cloud setup, and release workflows from day zero',
+        'Worked directly with founders and product teams to translate business direction into production-ready systems',
+        'Established development standards, reliability practices, and scalable service foundations in fast-moving teams'
+      ],
+      details: {
+        'Context / Problem':
+          'Early-stage startups required rapid product delivery with limited resources and evolving business priorities.',
+        'Scope & Constraints':
+          'Small teams, aggressive timelines, and frequent product pivots while maintaining production stability.',
+        'Architecture':
+          'Pragmatic service architectures focused on clear interfaces, fast iteration, and maintainable foundations.',
+        'Key Decisions & Tradeoffs':
+          'Balanced speed of execution with long-term maintainability and operational reliability.',
+        'Implementation Details':
+          'Built core backend services, integrations, infrastructure automation, and delivery pipelines.',
+        'Scale / Performance Characteristics':
+          'Designed systems to scale from early usage to sustained production growth.',
+        'Reliability & Observability':
+          'Introduced monitoring, logging, and incident-response patterns appropriate for lean engineering teams.',
+        'Outcomes / Impact':
+          'Enabled faster product launches, reduced technical uncertainty, and improved engineering velocity.',
+        'Technologies Used':
+          'Backend stacks, cloud infrastructure, DevOps workflows, and distributed service patterns.',
+        'Role & Ownership':
+          'Founding-level engineer owning technical direction and execution across the stack.'
+      }
+    },
+    {
       title: 'Founder — DownBeat · Self-employed',
       summary: [
         'Built and led a community-driven platform focused on resilience, personal growth, and peer support',
@@ -464,10 +495,9 @@ function renderCards() {
       .map((roleItem, index) => {
         const { role, company } = splitRoleTitle(roleItem.title);
         return `
-        <article class="card">
+        <article class="card other-exp-item">
           <h3 class="role-title">${role}</h3>
           <p class="role-company">${company}</p>
-          ${makeSummaryList(roleItem.summary)}
           <button class="btn" data-type="other-experience" data-index="${index}">View Details</button>
         </article>`;
       })
@@ -494,7 +524,10 @@ function renderCards() {
     .map(([title, desc]) => `<article class="card"><h3>${title}</h3><p class="body-copy">${desc}</p></article>`)
     .join('');
 
-  byId('principlesList').innerHTML = content.principles.map((p) => `<li>${p}</li>`).join('');
+  const principlesList = byId('principlesList');
+  if (principlesList) {
+    principlesList.innerHTML = content.principles.map((p) => `<li>${p}</li>`).join('');
+  }
 
   byId('techGrid').innerHTML = Object.entries(content.technologies)
     .map(
@@ -553,10 +586,22 @@ function openDetail(type, index) {
 function initInteractions() {
   document.addEventListener('click', (event) => {
     const btn = event.target.closest('button');
-    if (!btn) return;
-
-    if (btn.dataset.type) {
+    if (btn && btn.dataset.type) {
       openDetail(btn.dataset.type, Number(btn.dataset.index));
+    }
+
+    const mobileMenuBtn = byId('mobileMenuBtn');
+    const mobileViewMenu = byId('mobileViewMenu');
+    if (mobileMenuBtn && mobileViewMenu) {
+      if (event.target.closest('#mobileMenuBtn')) {
+        const open = mobileViewMenu.classList.toggle('open');
+        mobileMenuBtn.setAttribute('aria-expanded', String(open));
+        return;
+      }
+      if (!event.target.closest('#mobileViewMenu')) {
+        mobileViewMenu.classList.remove('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      }
     }
   });
 
@@ -566,6 +611,78 @@ function initInteractions() {
   });
 }
 
+function initViewNavigation() {
+  const tabs = Array.from(document.querySelectorAll('.view-tab, .mobile-view-item'));
+  const sections = Array.from(document.querySelectorAll('.view-section'));
+  const sectionMap = new Map(sections.map((section) => [section.id, section]));
+  let currentIndex = 0;
+  let wheelLock = false;
+
+  const setActiveView = (id) => {
+    const normalizedId = id === 'overview' ? 'home' : id;
+    const targetId = sectionMap.has(normalizedId) ? normalizedId : 'home';
+    currentIndex = sections.findIndex((section) => section.id === targetId);
+    sections.forEach((section) => section.classList.toggle('active', section.id === targetId));
+    tabs.forEach((tab) => tab.setAttribute('aria-pressed', String(tab.dataset.viewTarget === targetId)));
+    const targetSection = sectionMap.get(targetId);
+    if (targetSection) targetSection.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const setActiveViewByIndex = (index) => {
+    if (index < 0 || index >= sections.length || index === currentIndex) return;
+    setActiveView(sections[index].id);
+  };
+
+  const onBoundaryScroll = (event) => {
+    if (wheelLock) return;
+    if (byId('detailPanel')?.open) return;
+
+    const activeSection = sections[currentIndex];
+    if (!activeSection || event.currentTarget !== activeSection) return;
+
+    const delta = event.deltaY;
+    if (Math.abs(delta) < 18) return;
+
+    const atTop = activeSection.scrollTop <= 0;
+    const atBottom =
+      activeSection.scrollTop + activeSection.clientHeight >= activeSection.scrollHeight - 1;
+
+    if (delta > 0 && atBottom) {
+      event.preventDefault();
+      wheelLock = true;
+      setActiveViewByIndex(currentIndex + 1);
+      setTimeout(() => {
+        wheelLock = false;
+      }, 260);
+    } else if (delta < 0 && atTop) {
+      event.preventDefault();
+      wheelLock = true;
+      setActiveViewByIndex(currentIndex - 1);
+      setTimeout(() => {
+        wheelLock = false;
+      }, 260);
+    }
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      setActiveView(tab.dataset.viewTarget);
+      const mobileViewMenu = byId('mobileViewMenu');
+      const mobileMenuBtn = byId('mobileMenuBtn');
+      if (mobileViewMenu && mobileMenuBtn) {
+        mobileViewMenu.classList.remove('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  sections.forEach((section) => {
+    section.addEventListener('wheel', onBoundaryScroll, { passive: false });
+  });
+
+  setActiveView(window.location.hash.replace('#', '') || 'home');
+}
+
 renderTags();
 renderCards();
 initInteractions();
+initViewNavigation();

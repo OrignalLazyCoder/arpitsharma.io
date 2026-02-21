@@ -42,9 +42,41 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <header class="app-header">
+      <p class="app-brand">Arpit Sharma</p>
+      <button
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+        aria-expanded="false"
+        aria-controls="mobileViewMenu"
+        aria-label="Toggle menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="view-nav" aria-label="Section navigation">
+        <button class="view-tab" data-view-target="home" aria-pressed="true">Home</button>
+        <button class="view-tab" data-view-target="experience" aria-pressed="false">Experience</button>
+        <button class="view-tab" data-view-target="systems" aria-pressed="false">Projects</button>
+        <button class="view-tab" data-view-target="capabilities" aria-pressed="false">Capabilities</button>
+        <button class="view-tab" data-view-target="leadership" aria-pressed="false">Leadership</button>
+        <button class="view-tab" data-view-target="testimonials" aria-pressed="false">Recommendations</button>
+        <button class="view-tab" data-view-target="tech" aria-pressed="false">Tech Stack</button>
+        <button class="view-tab" data-view-target="contact" aria-pressed="false">Contact</button>
+      </nav>
+      <nav class="mobile-view-menu" id="mobileViewMenu" aria-label="Mobile section navigation">
+        <button class="mobile-view-item" data-view-target="home">Home</button>
+        <button class="mobile-view-item" data-view-target="experience">Experience</button>
+        <button class="mobile-view-item" data-view-target="systems">Projects</button>
+        <button class="mobile-view-item" data-view-target="capabilities">Capabilities</button>
+        <button class="mobile-view-item" data-view-target="leadership">Leadership</button>
+        <button class="mobile-view-item" data-view-target="testimonials">Recommendations</button>
+        <button class="mobile-view-item" data-view-target="tech">Tech Stack</button>
+        <button class="mobile-view-item" data-view-target="contact">Contact</button>
+      </nav>
+    </header>
 
-    <main id="main">
-      <section class="hero section" data-panel>
+    <main id="main" class="view-main">
+      <section id="home" class="hero section view-section active" data-panel>
         <div class="panel-chrome" aria-hidden="true">
           <div class="panel-controls">
             <span></span><span></span><span></span>
@@ -57,30 +89,26 @@
           Designing scalable systems with purpose and precision.
         </p>
         <p class="body-copy">
-          Senior engineer focused on building reliable platforms that keep working under real production pressure. I
-          design and implement backend systems, cloud infrastructure, and performance-critical services used by real
-          businesses at scale.
+          Senior engineer focused on building reliable platforms that continue to operate correctly under real
+          production conditions. I design and implement backend systems, cloud infrastructure, and performance-critical
+          services that support business-critical applications at scale.
+        </p>
+        <p class="body-copy">
+          I build backend platforms and distributed systems that remain stable as they grow in traffic, complexity, and
+          operational demands. My work spans cloud services, high-traffic web applications, data-intensive systems, and
+          hardware-integrated platforms. I am involved across the entire lifecycle — from system design and
+          architecture to implementation, deployment, performance tuning, and ongoing production support.
+        </p>
+        <p class="body-copy">
+          I focus on practical architecture that works in real environments, balancing performance, reliability,
+          scalability, cost, and delivery timelines rather than pursuing idealized designs. My goal is to create
+          systems that are maintainable, observable, and resilient, and that continue to deliver value as requirements
+          evolve over time.
         </p>
         <div class="tags" id="heroTags"></div>
       </section>
 
-      <section id="overview" class="section" data-panel>
-        <div class="panel-chrome" aria-hidden="true">
-          <div class="panel-controls">
-            <span></span><span></span><span></span>
-          </div>
-          <p class="panel-label">module.overview</p>
-        </div>
-        <h2>Engineering systems that work in the real world</h2>
-        <p class="body-copy">
-          I build backend platforms and distributed systems that need to stay stable under growth, complexity, and
-          failure. My work spans cloud services, high-traffic applications, and hardware-integrated platforms. I focus
-          on practical architecture — balancing performance, reliability, cost, and delivery timelines rather than
-          idealized designs.
-        </p>
-      </section>
-
-      <section id="experience" class="section" data-panel>
+      <section id="experience" class="section view-section" data-panel>
         <div class="panel-chrome" aria-hidden="true">
           <div class="panel-controls">
             <span></span><span></span><span></span>
@@ -89,13 +117,13 @@
         </div>
         <h2>Experience</h2>
         <div class="card-grid" id="experienceGrid"></div>
-        <details class="other-experience">
-          <summary>Other Experiences</summary>
+        <div class="other-experience-block">
+          <h3>Other Experiences</h3>
           <div class="card-grid" id="otherExperienceGrid"></div>
-        </details>
+        </div>
       </section>
 
-      <section id="systems" class="section" data-panel>
+      <section id="systems" class="section view-section" data-panel>
         <div class="panel-chrome" aria-hidden="true">
           <div class="panel-controls">
             <span></span><span></span><span></span>
@@ -106,7 +134,7 @@
         <div class="card-grid" id="systemsGrid"></div>
       </section>
 
-      <section id="capabilities" class="section" data-panel>
+      <section id="capabilities" class="section view-section" data-panel>
         <div class="panel-chrome" aria-hidden="true">
           <div class="panel-controls">
             <span></span><span></span><span></span>
@@ -117,7 +145,7 @@
         <div class="card-grid" id="capabilitiesGrid"></div>
       </section>
 
-      <section id="leadership" class="section" data-panel>
+      <section id="leadership" class="section view-section" data-panel>
         <div class="panel-chrome" aria-hidden="true">
           <div class="panel-controls">
             <span></span><span></span><span></span>
@@ -128,7 +156,7 @@
         <div class="card-grid" id="leadershipGrid"></div>
       </section>
 
-      <section id="testimonials" class="section" data-panel>
+      <section id="testimonials" class="section view-section" data-panel>
         <div class="panel-chrome" aria-hidden="true">
           <div class="panel-controls">
             <span></span><span></span><span></span>
@@ -139,18 +167,7 @@
         <div class="card-grid" id="testimonialsGrid"></div>
       </section>
 
-      <section id="principles" class="section" data-panel>
-        <div class="panel-chrome" aria-hidden="true">
-          <div class="panel-controls">
-            <span></span><span></span><span></span>
-          </div>
-          <p class="panel-label">module.principles</p>
-        </div>
-        <h2>Engineering Principles</h2>
-        <ul class="list" id="principlesList"></ul>
-      </section>
-
-      <section id="tech" class="section" data-panel>
+      <section id="tech" class="section view-section" data-panel>
         <div class="panel-chrome" aria-hidden="true">
           <div class="panel-controls">
             <span></span><span></span><span></span>
@@ -161,7 +178,7 @@
         <div class="card-grid" id="techGrid"></div>
       </section>
 
-      <section id="contact" class="section" data-panel>
+      <section id="contact" class="section view-section" data-panel>
         <div class="panel-chrome" aria-hidden="true">
           <div class="panel-controls">
             <span></span><span></span><span></span>

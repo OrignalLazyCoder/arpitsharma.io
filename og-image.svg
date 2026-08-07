@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Arpit Sharma · Full Stack Engineer</title>
+  <desc id="desc">Full Stack Engineer at Motorola Solutions. Distributed systems, cloud-native platforms, presales and data security.</desc>
+
+  <defs>
+    <radialGradient id="cover" cx="80%" cy="-10%" r="120%">
+      <stop offset="0%" stop-color="#378fe9"/>
+      <stop offset="45%" stop-color="#0a66c2"/>
+      <stop offset="100%" stop-color="#044a8f"/>
+    </radialGradient>
+    <linearGradient id="ava" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a66c2"/>
+      <stop offset="100%" stop-color="#378fe9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#f4f2ee"/>
+  <!-- profile card -->
+  <rect x="60" y="60" width="1080" height="510" rx="20" fill="#ffffff" stroke="rgba(0,0,0,0.08)"/>
+  <path d="M60 80a20 20 0 0 1 20-20h1040a20 20 0 0 1 20 20v150H60z" fill="url(#cover)"/>
+
+  <!-- avatar -->
+  <circle cx="190" cy="250" r="76" fill="#ffffff"/>
+  <circle cx="190" cy="250" r="66" fill="url(#ava)"/>
+  <text x="190" y="272" text-anchor="middle" fill="#ffffff" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="52" font-weight="700">AS</text>
+
+  <text x="116" y="392" fill="#111111" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="60" font-weight="700">Arpit Sharma</text>
+  <text x="118" y="440" fill="#5a5a5a" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="28">Full Stack Engineer @ Motorola Solutions</text>
+  <text x="118" y="480" fill="#5a5a5a" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24">Distributed Systems · Cloud-Native · Presales &amp; Data Security</text>
+
+  <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="22">
+    <rect x="118" y="510" width="150" height="44" rx="22" fill="#0a66c2"/>
+    <text x="193" y="539" text-anchor="middle" fill="#ffffff" font-weight="600">Message</text>
+    <rect x="284" y="510" width="220" height="44" rx="22" fill="none" stroke="rgba(0,0,0,0.25)"/>
+    <text x="394" y="539" text-anchor="middle" fill="#5a5a5a">arpitsharma.io</text>
+  </g>
+</svg>

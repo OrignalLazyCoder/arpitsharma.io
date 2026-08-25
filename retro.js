@@ -8,7 +8,7 @@
   var actx = null;
   var sfxOn = true;
   try { sfxOn = localStorage.getItem("sfx") !== "off"; } catch (e) {}
-  function beep(freq, dur, type) {
+  function beep(freq, dur, type, gain) {
     if (!sfxOn || !AC) return;
     try {
       actx = actx || new AC();
@@ -16,7 +16,7 @@
       var o = actx.createOscillator(), g = actx.createGain();
       o.type = type || "square";
       o.frequency.value = freq;
-      g.gain.setValueAtTime(0.04, actx.currentTime);
+      g.gain.setValueAtTime(gain || 0.04, actx.currentTime);
       g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + dur);
       o.connect(g);
       g.connect(actx.destination);
@@ -35,10 +35,21 @@
     });
     paintSfxBtn();
   }
-  /* every Win95 button clicks like it means it */
+  /* every click makes a noise, like the old days */
   document.addEventListener("click", function (e) {
-    if (e.target && e.target.closest && e.target.closest(".btn95")) beep(660, 0.05);
+    if (!e.target || !e.target.closest) return;
+    if (e.target.closest(".btn95")) beep(660, 0.05);          /* chunky Win95 button */
+    else if (e.target.closest("a")) beep(880, 0.035);          /* link chirp */
+    else beep(1100, 0.02, "square", 0.02);                     /* soft tick anywhere */
   });
+  /* scroll ratchet: tiny pitch-jittered ticks while the page moves */
+  var lastScrollBlip = 0;
+  window.addEventListener("scroll", function () {
+    var t = Date.now();
+    if (t - lastScrollBlip < 110) return;
+    lastScrollBlip = t;
+    beep(1500 + Math.random() * 300, 0.015, "square", 0.015);
+  }, { passive: true });
 
   /* ---- star confetti bursts ---- */
   function burstAt(x, y) {

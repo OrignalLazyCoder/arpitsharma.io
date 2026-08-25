@@ -121,6 +121,7 @@ h1 .me { color: var(--heading); }
 
 /* ---------- marquee ---------- */
 .marquee-wrap {
+  overflow: hidden; max-width: 100%;
   border: 2px inset var(--bevel-lt);
   background: var(--marquee-bg); color: var(--marquee-fg);
   font-family: "VT323", monospace; font-size: 1.25rem;
@@ -368,17 +369,54 @@ footer { margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: var(
 
 /* ---------- responsive ---------- */
 @media (max-width: 48rem) {
-  body { font-size: 15px; padding-bottom: 3.4rem; }
-  .layout { grid-template-columns: 1fr; }
-  .sidebar { position: static; }
+  body { font-size: 15px; padding: 0.9rem 0.8rem calc(3.4rem + env(safe-area-inset-bottom)); }
+  /* nothing may force the layout viewport wider than the phone */
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 0.8rem; }
+  .sidebar, .sidebar nav, main, main section, .term, .banner, .brand { min-width: 0; max-width: 100%; }
+  main { overflow-wrap: break-word; }
+
+  /* compact banner: identity in half the height */
+  h1 { font-size: 1.9rem; }
+  .tagline, .contact { font-size: 0.85rem; }
+  .pixel-logo { width: 34px; height: 42px; }
+  .banner { margin-bottom: 0.4rem; }
+  .marquee-wrap { margin-bottom: 0.7rem; font-size: 1.1rem; }
+
+  /* accordion sections: tap a header to unfold, [+]/[–] Win95 style */
+  main section .hgroup { cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+  main section .hgroup::after { content: "[–]"; font: 700 1rem "Courier New", monospace; color: var(--heading); flex: none; }
+  main section.collapsed .hgroup { margin-bottom: 0; border-bottom: none; }
+  main section.collapsed .hgroup::after { content: "[+]"; }
+  main section.collapsed > *:not(.hgroup) { display: none !important; }
+  main section.collapsed { padding-bottom: 0.95rem; }
+  .banner { gap: 0.7rem; }
+  .brand { gap: 0.6rem; }
   .banner-right { flex-direction: row; align-items: center; flex-wrap: wrap; }
 
-  /* nav becomes a two-column tap grid */
-  .sidebar nav { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-  .sidebar nav a.navbtn { border-bottom: none; padding: 0.55rem 0.5rem; }
+  /* compact sidebar: content must be one thumb-flick away, not a full screen down */
+  .sidebar { position: static; padding: 0.55rem; }
+  .sidebar nav {
+    display: flex; overflow-x: auto; gap: 5px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .sidebar nav::-webkit-scrollbar { display: none; }
+  .sidebar nav a.navbtn {
+    flex: none; white-space: nowrap;
+    border-bottom: none; border: 1px solid rgba(0, 0, 0, 0.35);
+    padding: 0.6rem 0.8rem; min-height: 44px; display: flex; align-items: center;
+  }
+  .side-label, .worldwide { display: none; }
+  .btn95.wide { margin-top: 6px; }
 
+  /* thumb-sized Win95 buttons everywhere */
+  .btn95 { padding: 13px 12px; }
+  .findit { margin-bottom: 0.45rem; }
   /* 16px inputs stop iOS from zooming on focus */
   .findit input, .worldwide select { font-size: 16px; }
+
+  /* slimmer panels = wider content */
+  main section, main article { padding: 0.95rem 0.85rem 1.1rem; }
+  .term { padding: 0.85rem 0.8rem; }
 
   /* skills table stacks into cards */
   .skilltable, .skilltable tbody, .skilltable tr { display: block; }
@@ -387,15 +425,17 @@ footer { margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: var(
   .skilltable td { border-top: 1px solid var(--table-border); }
 
   /* bigger game controls for thumbs */
-  .dpad .btn95 { padding: 12px 16px; font-size: 10px; }
+  .dpad .btn95 { padding: 14px 18px; font-size: 10px; }
 
-  /* popups stay on screen */
-  .clippy { right: 8px; bottom: 40px; max-width: calc(100vw - 16px); }
+  /* popups stay on screen, above the home-bar */
+  .clippy { right: 8px; bottom: calc(44px + env(safe-area-inset-bottom)); max-width: calc(100vw - 16px); }
   .clippy-guy { font-size: 36px; }
-  .winpop { left: 8px; bottom: 40px; width: min(250px, calc(100vw - 16px)); }
+  .winpop { left: 8px; bottom: calc(44px + env(safe-area-inset-bottom)); width: min(250px, calc(100vw - 16px)); }
 
+  .badge { font-size: 7px; }
   .saver-title { font-size: 1.6rem; }
   .saver-sub { font-size: 1.1rem; }
+  .statusbar { padding-bottom: calc(3px + env(safe-area-inset-bottom)); }
   .statusbar .ssl { display: none; }
 }
 

@@ -150,6 +150,41 @@
     });
   }
 
+  /* mobile accordions: fold every section but the summary so the page is a flick, not a hike */
+  var mobileMQ = window.matchMedia ? window.matchMedia("(max-width: 48rem)") : null;
+  var accSections = document.querySelectorAll("main > section");
+  function expandSection(sec) { if (sec && sec.classList) sec.classList.remove("collapsed"); }
+  if (mobileMQ && accSections.length) {
+    var hgroups = document.querySelectorAll("main > section .hgroup");
+    for (var hi = 0; hi < hgroups.length; hi++) {
+      (function (hg) {
+        hg.addEventListener("click", function () {
+          if (!mobileMQ.matches) return;
+          var sec = hg.parentNode;
+          var opening = sec.classList.contains("collapsed");
+          sec.classList.toggle("collapsed");
+          beep(opening ? 700 : 500, 0.04);
+        });
+      })(hgroups[hi]);
+    }
+    /* nav chips, hash jumps, and printing all unfold their targets */
+    var navAnchors = document.querySelectorAll('a.navbtn[href^="#"]');
+    for (var ni = 0; ni < navAnchors.length; ni++) {
+      (function (a) {
+        a.addEventListener("click", function () {
+          expandSection(document.getElementById(a.getAttribute("href").slice(1)));
+        });
+      })(navAnchors[ni]);
+    }
+    window.addEventListener("hashchange", function () {
+      expandSection(document.getElementById(location.hash.slice(1)));
+    });
+    if (location.hash) expandSection(document.getElementById(location.hash.slice(1)));
+    window.addEventListener("beforeprint", function () {
+      for (var pi = 0; pi < accSections.length; pi++) accSections[pi].classList.remove("collapsed");
+    });
+  }
+
   /* FIND IT — scroll to the first section mentioning the query */
   var findForm = $("findForm");
   if (findForm) {
@@ -160,6 +195,7 @@
       var blocks = document.querySelectorAll("main section, main article");
       for (var i = 0; i < blocks.length; i++) {
         if (blocks[i].textContent.toLowerCase().indexOf(q) !== -1) {
+          expandSection(blocks[i]);
           blocks[i].scrollIntoView({ behavior: "smooth", block: "start" });
           blocks[i].classList.remove("flash");
           void blocks[i].offsetWidth;

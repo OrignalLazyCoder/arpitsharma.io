@@ -546,11 +546,24 @@
     });
   }
 
-  /* idle screensaver: ARPIT.EXE bounces like it's 1997 */
-  var saver = null, saverRaf = null, idleTimer = null;
+  /* idle screensaver: ARPIT.EXE bounces like it's 1997, and pitches like it's a career fair */
+  var saver = null, saverRaf = null, saverSlideTimer = null, idleTimer = null;
+  var SAVER_SLIDES = [
+    { t: "ARPIT_SHARMA.EXE", s: "Full-Stack & Distributed-Systems Engineer · 7 years shipping" },
+    { t: "EXPERIENCE.LOG", s: "Motorola Solutions · ex-Engineering Manager @ Angara · mavQ · 25+ products" },
+    { t: "STACK.SYS", s: "Rust · Go · TypeScript · Java · Python · React · Node · Kafka" },
+    { t: "SCALE.DAT", s: "2M+ req/sec at the edge · 10B events/day · 320M reads/sec · 99.9% uptime" },
+    { t: "CLOUD.CFG", s: "AWS · GCP · Azure · Kubernetes · Terraform · ArgoCD" },
+    { t: "SECURITY.BIN", s: "Zero-trust · mTLS · HIPAA · SOC 2 · OWASP Top 10" },
+    { t: "BUSINESS.BAT", s: "Presales engineering · client demos · conversion 12% → 18%" },
+    { t: "SIDE_QUESTS.DIR", s: "Built an OS in Rust · wrote an interpreter for fun · made a game where you ARE the ball", fun: true },
+    { t: "COWORKER.INI", s: "Ships fast · reviews kindly · debugs calmly · explains kernels with genuine enthusiasm", fun: true },
+    { t: "VIBES.WAV", s: "Will defend the marquee tag in code review · actually fun on incident calls", fun: true }
+  ];
   function stopSaver() {
     if (!saver) return;
     cancelAnimationFrame(saverRaf);
+    clearInterval(saverSlideTimer);
     if (saver.parentNode) saver.parentNode.removeChild(saver);
     saver = null;
   }
@@ -558,9 +571,24 @@
     if (saver || document.hidden || reducedMotion) return;
     saver = document.createElement("div");
     saver.className = "saver";
-    saver.innerHTML = '<div class="saver-logo"><span class="pixel-logo big"></span><span class="saver-txt">ARPIT.EXE</span></div><p class="saver-hint">hit any key to return</p>';
+    saver.innerHTML =
+      '<div class="saver-logo"><span class="pixel-logo big"></span>' +
+      '<div class="saver-card"><span class="saver-title"></span><span class="saver-sub"></span></div></div>' +
+      '<p class="saver-hint">ARPIT.EXE screensaver · now playing: the arpit show · hit any key to return</p>';
     document.body.appendChild(saver);
     var el = saver.firstChild;
+    var titleEl = saver.querySelector(".saver-title");
+    var subEl = saver.querySelector(".saver-sub");
+    var si = 0;
+    var showSlide = function () {
+      var s = SAVER_SLIDES[si % SAVER_SLIDES.length];
+      si++;
+      titleEl.textContent = s.t;
+      subEl.textContent = s.s;
+      el.classList.toggle("fun", !!s.fun);
+    };
+    showSlide();
+    saverSlideTimer = setInterval(showSlide, 4000);
     var x = 40, y = 40, dx = 2.2, dy = 1.7;
     var loop = function () {
       var w = window.innerWidth - el.offsetWidth, h = window.innerHeight - el.offsetHeight;
@@ -582,6 +610,8 @@
     document.addEventListener(idleEvents[ie], resetIdle, { passive: true });
   }
   resetIdle();
+  /* console crowd can summon it directly */
+  window.__screensaver = startSaver;
 
   /* the name does a wave on hover */
   var me = document.querySelector("h1 .me");
@@ -636,7 +666,7 @@
       "╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝   ╚═╝",
       "color:#33ff66;background:#000;font-family:monospace;line-height:1.2"
     );
-    console.log("You opened DevTools. 10 GEEK POINTS.\nHiring? hello@arpitsharma.io — and yes, the Konami code works out there.");
+    console.log("You opened DevTools. 10 GEEK POINTS.\nSay hi: hello@arpitsharma.io — and yes, the Konami code works out there.\nBonus: call __screensaver() to start the show without waiting 45 seconds.");
   } catch (e) {}
 
   /* respect reduced motion: park the marquees */

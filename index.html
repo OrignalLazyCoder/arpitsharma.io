@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arpit Sharma · Full-Stack &amp; Distributed-Systems Engineer</title>
     <meta
       name="description"
@@ -11,7 +11,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://arpitsharma.io/" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#ffffff" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://arpitsharma.io/" />
     <meta property="og:title" content="Arpit Sharma · Full-Stack &amp; Distributed-Systems Engineer" />
@@ -21,336 +21,305 @@
     <meta name="twitter:title" content="Arpit Sharma · Full-Stack &amp; Distributed-Systems Engineer" />
     <meta name="twitter:description" content="Full-stack and distributed-systems engineer at Motorola Solutions. Scalable platforms, cloud-native infra, presales and data security." />
 
-    <script>
-      /* apply saved theme before first paint; dark is the default */
-      try { if (localStorage.getItem("theme") === "light") document.documentElement.classList.add("light"); } catch (e) {}
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="retro.css?v=6" />
+    <style>
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #111111;
+        font: 17px/1.6 Georgia, "Times New Roman", Cambria, serif;
+        padding: 2.5rem clamp(1.25rem, 5vw, 5rem) 4rem;
+      }
+
+      a { color: #0b57d0; }
+      a:hover { text-decoration: none; }
+
+      header {
+        display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem;
+        border-bottom: 3px solid #111; padding-bottom: 1rem; margin-bottom: 1.5rem;
+      }
+      header .id { min-width: 0; }
+      h1 { font-size: 2.4rem; margin: 0 0 0.25rem; letter-spacing: -0.01em; }
+      .tagline { font-size: 1.15rem; margin: 0 0 0.5rem; font-style: italic; color: #333; }
+      .contact { font-size: 0.95rem; margin: 0; color: #333; }
+      .contact a { color: #0b57d0; }
+
+      .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; flex: none; justify-content: flex-end; }
+      .actions .btn {
+        font: inherit; font-size: 0.9rem; cursor: pointer; text-decoration: none; white-space: nowrap;
+        background: #111; color: #fff; border: 1.5px solid #111;
+        border-radius: 6px; padding: 0.45rem 1.1rem; line-height: 1.25;
+      }
+      .actions .btn.secondary { background: #fff; color: #111; }
+      .actions .btn:hover { opacity: 0.85; text-decoration: none; }
+
+      @media (max-width: 48rem) {
+        header { flex-direction: column; gap: 0.9rem; }
+        .actions { width: 100%; justify-content: flex-start; }
+      }
+
+      h2 {
+        font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.05em;
+        border-bottom: 1px solid #bbb; padding-bottom: 0.3rem;
+        margin: 2.2rem 0 1rem;
+      }
+
+      p { margin: 0.6rem 0; }
+
+      .job { margin: 0 0 1.5rem; }
+      .job-head {
+        display: flex; justify-content: space-between; align-items: baseline;
+        flex-wrap: wrap; gap: 0.2rem 1.5rem; margin: 0;
+      }
+      .job-head .title { font-size: 1.08rem; }
+      .job-head .title b { font-weight: 700; }
+      .job-head .dates { color: #555; font-size: 0.92rem; white-space: nowrap; font-style: italic; }
+      ul { margin: 0.5rem 0 0; padding-left: 1.3rem; }
+      li { margin: 0.3rem 0; }
+      .stack-line { margin: 0.5rem 0 0; font-size: 0.92rem; color: #444; }
+      .role { margin: 1.1rem 0 0.15rem; padding-left: 0.9rem; border-left: 2px solid #ddd; }
+      .role .rtitle { font-weight: 700; font-size: 1rem; }
+      .role .rdates { color: #666; font-size: 0.86rem; font-style: italic; margin-left: 0.55rem; }
+      .role + ul { padding-left: 2.2rem; }
+      .subhead { font-size: 0.95rem; font-weight: 700; color: #555; margin: 1.8rem 0 0.5rem; }
+      .earlier { list-style: none; padding: 0; margin: 0; }
+      .earlier li { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.1rem 1.2rem; padding: 0.55rem 0; border-top: 1px solid #eee; }
+      .earlier li:first-child { border-top: none; }
+      .earlier .e-main { max-width: 54rem; }
+      .earlier .e-dates { color: #666; font-size: 0.85rem; font-style: italic; white-space: nowrap; }
+
+      .proj-list { list-style: none; padding: 0; margin: 0.5rem 0 0; column-gap: 3rem; }
+      .proj-list li { margin: 0.55rem 0; break-inside: avoid; }
+      .proj-list b { font-weight: 700; }
+
+      .skills p { margin: 0.35rem 0; }
+      .skills b { display: inline-block; min-width: 11rem; }
+
+      .writing-list { list-style: none; padding: 0; margin: 0.5rem 0 0; }
+      .writing-list li { margin: 0.4rem 0; }
+      .writing-list .when { color: #777; font-size: 0.85rem; font-style: italic; margin-right: 0.5rem; }
+
+      footer { margin-top: 3rem; border-top: 1px solid #bbb; padding-top: 1rem; font-size: 0.85rem; color: #666; }
+
+      @media (min-width: 60rem) { .proj-list { column-count: 2; } }
+      @media (max-width: 34rem) { .skills b { display: block; min-width: 0; } }
+
+      @media print {
+        .actions { display: none !important; }
+        body { padding: 0.5rem 1rem; font-size: 11.5pt; color: #000; }
+        a { color: #000; text-decoration: none; }
+        h1 { font-size: 22pt; }
+        section, .job { break-inside: avoid; }
+      }
+    </style>
   </head>
   <body>
-    <!-- ══════════════════════════════════════════════════════════
-         You read the source. 10 GEEK POINTS awarded.
-         Yes, the marquee tag is real. No, I will not apologise.
-         Hiring? hello@arpitsharma.io
-         ══════════════════════════════════════════════════════════ -->
-    <header class="banner">
-      <div class="brand">
-        <span class="pixel-logo" aria-hidden="true"></span>
-        <div>
-          <h1>Welcome to <span class="me">Arpit Sharma</span></h1>
-          <p class="tagline">Full-Stack &amp; Distributed-Systems Engineer · Rust · Go · Node · AWS / GCP · Bengaluru, India</p>
-          <p class="contact">
-            📟 <a href="mailto:hello@arpitsharma.io">hello@arpitsharma.io</a> ·
-            <a href="https://github.com/OrignalLazyCoder" rel="noopener noreferrer">GitHub</a> ·
-            <a href="https://linkedin.com/in/lazycoderr" rel="noopener noreferrer">LinkedIn</a>
-          </p>
-        </div>
+    <header>
+      <div class="id">
+        <h1>Arpit Sharma</h1>
+        <p class="tagline">Full-Stack &amp; Distributed-Systems Engineer · Rust · Go · Node · AWS / GCP</p>
+        <p class="contact">
+          Bengaluru, India &nbsp;·&nbsp;
+          <a href="mailto:hello@arpitsharma.io">hello@arpitsharma.io</a> &nbsp;·&nbsp;
+          <a href="https://github.com/OrignalLazyCoder" rel="noopener noreferrer">GitHub</a> &nbsp;·&nbsp;
+          <a href="https://linkedin.com/in/lazycoderr" rel="noopener noreferrer">LinkedIn</a>
+        </p>
       </div>
-      <div class="banner-right">
-        <div class="datebox" id="datebox"><b>JUL</b> 14 · 1997</div>
-        <button id="lightsBtn" type="button" class="btn95">☀ LIGHTS ON</button>
+      <div class="actions">
+        <a class="btn" href="mailto:hello@arpitsharma.io">Contact</a>
+        <button id="shareBtn" type="button" class="btn secondary">Share</button>
       </div>
     </header>
 
-    <div class="rainbow" aria-hidden="true"></div>
-
-    <div class="marquee-wrap">
-      <marquee scrollamount="6">★★★ WELCOME TO THE PERSONAL HOMEPAGE OF ARPIT SHARMA ★★★ FULL-STACK &amp; DISTRIBUTED-SYSTEMS ENGINEER ★★★ RUST · GO · NODE · AWS/GCP ★★★ 2M+ REQUESTS/SEC AT THE EDGE ★★★ 10 BILLION EVENTS A DAY ★★★ 99.9% UPTIME ★★★ NOW WITH DARK MODE ★★★ PLAY SNAKE IN THE ARCADE ★★★ SIGN THE GUESTBOOK ★★★ BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 ★★★</marquee>
-    </div>
-
-    <div class="layout">
-      <aside class="sidebar">
-        <form id="findForm" class="findit">
-          <input id="findInput" type="text" placeholder="rust, kafka…" aria-label="Find on this page" />
-          <button class="btn95" type="submit">FIND IT</button>
-        </form>
-        <nav aria-label="Sections">
-          <a class="navbtn" href="#summary">▸ Summary</a>
-          <a class="navbtn" href="#skills">▸ Skills</a>
-          <a class="navbtn" href="#experience">▸ Experience</a>
-          <a class="navbtn" href="#projects">▸ Projects</a>
-          <a class="navbtn" href="#arcade">▸ Arcade 🕹</a>
-          <a class="navbtn" href="#writing">▸ Writing</a>
-          <a class="navbtn" href="#education">▸ Education</a>
-          <a class="navbtn" href="https://www.linkedin.com/in/lazycoderr/recent-activity/all/" rel="noopener noreferrer">▸ All Writing</a>
-          <a class="navbtn" href="mailto:hello@arpitsharma.io">▸ Guestbook ✍</a>
-        </nav>
-        <p class="side-label">Arpit Sites Worldwide</p>
-        <div class="worldwide">
-          <select id="siteSelect" size="4" aria-label="Arpit sites worldwide">
-            <option value="https://github.com/OrignalLazyCoder" selected>GitHub</option>
-            <option value="https://linkedin.com/in/lazycoderr">LinkedIn</option>
-            <option value="https://theuprising.arpitsharma.io">The Uprising (game)</option>
-            <option value="https://www.linkedin.com/in/lazycoderr/recent-activity/all/">LinkedIn posts</option>
-          </select>
-          <button id="goBtn" type="button" class="btn95">GO</button>
-        </div>
-        <button id="shareBtn" type="button" class="btn95 wide">⎘ SHARE SITE</button>
-        <button id="sfxBtn" type="button" class="btn95 wide">🔊 SFX: ON</button>
-      </aside>
-
-      <main>
-        <!-- ===== SUMMARY ===== -->
-        <section id="summary">
-          <div class="hgroup"><h2>■ whoami</h2></div>
-          <div class="term">
-            <p><span class="prompt">arpit@homepage:~$</span> whoami</p>
-            <p class="out">
-              Full-stack and distributed-systems engineer with 7 years across backend, frontend, and
-              cloud infrastructure. I architect scalable systems and cloud-native platforms that cut
-              costs, lift conversion, and hold 99.9%+ uptime at scale, from the data model up to the
-              React on top. I also work close to the business: presales engineering, client demos and
-              proofs-of-concept, and data-security initiatives. I have a deep interest in systems
-              programming and low-level performance (Rust, kernels, memory-mapped I/O), and a habit of
-              shipping production-grade software that ties engineering execution to measurable business
-              impact. Comfortable from the kernel to the sales call.
-            </p>
-            <p><span class="prompt">arpit@homepage:~$</span> <span class="caret"></span></p>
-          </div>
-        </section>
-
-        <!-- ===== SKILLS ===== -->
-        <section id="skills">
-          <div class="hgroup"><h2>■ Tech Specs</h2></div>
-          <table class="skilltable">
-            <tr><th>Languages</th><td>Go, Rust, TypeScript, JavaScript, Java, C#, Python, SQL, Bash</td></tr>
-            <tr><th>Backend</th><td>Node.js, NestJS, Spring Boot, .NET, Django, FastAPI, gRPC, GraphQL, REST</td></tr>
-            <tr><th>Frontend</th><td>React, Next.js, Angular, Vue, Redux, TailwindCSS</td></tr>
-            <tr><th>Data &amp; Messaging</th><td>PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch, Kafka, RabbitMQ</td></tr>
-            <tr><th>Cloud &amp; DevOps</th><td>AWS, GCP, Azure, Kubernetes, Docker, Terraform, ArgoCD, Jenkins</td></tr>
-            <tr><th>Security</th><td>Zero-trust, mTLS, SAST, OWASP Top 10, HIPAA &amp; SOC 2, secrets management</td></tr>
-            <tr><th>Observability</th><td>Prometheus, Grafana, OpenTelemetry, Datadog, ELK</td></tr>
-            <tr><th>Blockchain &amp; Web3</th><td>Solidity, Ethereum, Smart Contracts, IPFS</td></tr>
-          </table>
-        </section>
-
-        <!-- ===== EXPERIENCE ===== -->
-        <section id="experience">
-          <div class="hgroup"><h2>■ Experience</h2></div>
-
-          <div class="job">
-            <p class="job-head">
-              <span class="title"><b><a href="https://www.motorolasolutions.com/" rel="noopener noreferrer">Motorola Solutions</a></b><span class="new">NEW!</span></span>
-              <span class="dates">Bengaluru, India · Hybrid</span>
-            </p>
-            <p class="role"><span class="rtitle">Software Engineer</span><span class="rdates">Jul 2026 - Present</span></p>
-            <ul>
-              <li>Lead engineering projects that keep production systems running smoothly and data safe across teams.</li>
-              <li>Drive presales engineering, partnering with sales teams to design technical solutions and demonstrate product capabilities to prospective clients.</li>
-              <li>Lead data-security initiatives, implementing safeguards and best practices to protect sensitive information across internal systems.</li>
-              <li>Design and build internal tools in Python and Go, automating manual workflows and improving team productivity.</li>
-              <li>Architect and deploy cloud-native solutions on Microsoft Azure for scalability and reliability.</li>
-              <li>Develop AI-powered features and integrations that enhance internal tooling and decision-making.</li>
-            </ul>
-          </div>
-
-          <div class="job">
-            <p class="job-head">
-              <span class="title"><b><a href="https://www.angara.com/in-en" rel="noopener noreferrer">Angara Ecommerce</a></b></span>
-              <span class="dates">Noida, India · On-site</span>
-            </p>
-            <p class="role"><span class="rtitle">Software Engineering Manager</span><span class="rdates">Aug 2025 - Jul 2026</span></p>
-            <ul>
-              <li>Own the tech platform for a global fine-jewellery ecommerce company, covering personalisation, product customisation, payments, and fulfilment, plus the infrastructure beneath it.</li>
-              <li>Led a re-architecture of 10+ core commerce modules; carried 2&times; traffic growth with no loss of performance and cut AWS costs 30% via rightsizing and reserved capacity.</li>
-              <li>Designed low-latency, high-throughput backends using caching, async processing, and optimised data-access patterns, sustaining 99.9% uptime across AWS and GCP through peak retail.</li>
-              <li>Ran the platform on EKS and GKE with Helm, ArgoCD, and Terraform, standardising deployments and improving release velocity.</li>
-              <li>Drove conversion-rate optimisation that moved conversion from 12% to 18% across the main purchase funnels, lifting revenue and average order value.</li>
-              <li>Lead 3 cross-functional teams: set the technical roadmap, run architecture reviews, mentor senior engineers, and validate decisions by writing core backend code myself.</li>
-            </ul>
-            <p class="stack-line"><b>Stack:</b> Node.js · TypeScript · Postgres · Redis · Kafka · Kubernetes · AWS · GCP</p>
-          </div>
-
-          <div class="job">
-            <p class="job-head">
-              <span class="title"><b><a href="https://mavq.com/" rel="noopener noreferrer">mavQ</a></b> (formerly <a href="https://www.mtxb2b.com/s/" rel="noopener noreferrer">MTX Group</a>)</span>
-              <span class="dates">Jaipur / Remote · 4 yrs 5 mos</span>
-            </p>
-            <p class="role"><span class="rtitle">Senior Software Engineer</span><span class="rdates">Apr 2023 - Aug 2025 · Remote</span></p>
-            <ul>
-              <li>Worked mostly on enterprise platforms for US state-government clients and large organisations under HIPAA and SOC 2, where correctness and auditability were non-negotiable.</li>
-              <li>Built a distributed document-processing and indexing stack (high-ingest, low-latency querying) that became the foundation for case-management platforms with AI-powered search, workflow automation, reporting, and call-centre integration.</li>
-              <li>Owned architecture and scoping on multiple multi-million-dollar projects; during presales, ran proofs-of-concept, put together technical estimates, and presented directly to clients and stakeholders.</li>
-              <li>Mentored engineers on the team, ran technical interviews, and was on-call for the systems I built.</li>
-            </ul>
-            <p class="role"><span class="rtitle">Software Engineer</span><span class="rdates">Apr 2021 - Apr 2023 · Jaipur (Hybrid)</span></p>
-            <ul>
-              <li>Contributed to 25+ products for clients across India, the US, and Canada, picking up new stacks quickly across NestJS, Loopback4, Angular, React, React Native, Go, .NET, and Django.</li>
-              <li>Developed internal tooling that automated repetitive parts of the development process and helped the team ship faster.</li>
-              <li>Got involved in presales too, responding to RFPs, running demos, and writing technical proposals, which connected engineering decisions to business and client expectations.</li>
-            </ul>
-            <p class="stack-line"><b>Stack:</b> Java · Spring · Python · Go · React · Angular · ElasticSearch · MongoDB · AWS · Azure</p>
-          </div>
-
-          <div class="job">
-            <p class="job-head">
-              <span class="title"><b><a href="https://www.impledge.com/" rel="noopener noreferrer">Impledge Technologies</a></b></span>
-              <span class="dates">Noida, India · 1 yr 4 mos</span>
-            </p>
-            <p class="role"><span class="rtitle">Associate Software Engineer</span><span class="rdates">Aug 2020 - Apr 2021</span></p>
-            <ul>
-              <li>My first engineering job and the year I learned the most: shipped client-facing products on weekly cycles across ASP.NET, Angular, React, NestJS, and Azure.</li>
-              <li>Started as a trainee and grew into the associate role by owning work end to end, understanding requirements, testing my own changes, and seeing things through to deployment.</li>
-              <li>Built the engineering habits I still rely on: reading existing code carefully, debugging properly, and not shipping something I don't understand.</li>
-            </ul>
-            <p class="role"><span class="rtitle">Trainee Software Engineer</span><span class="rdates">Jan 2020 - Aug 2020</span></p>
-          </div>
-
-          <p class="subhead">Earlier &amp; community</p>
-          <ul class="earlier">
-            <li><span class="e-main"><b>DownBeat</b>, Founder (Self-employed). A not-for-profit mental-health support community I started and ran for over three years, building and maintaining all of the technology myself.</span><span class="e-dates">Oct 2017 - Jan 2021</span></li>
-            <li><span class="e-main"><b>Indian Oil Corporation</b>, Network Engineer Trainee. Built a device-monitoring tool for the refinery's private network; adopted plant-wide and recognised with a formal DGM letter of appreciation.</span><span class="e-dates">Jun 2019 - Aug 2019</span></li>
-            <li><span class="e-main"><b>Helping Brainz</b>, Chapter Leader &amp; Web / DB Lead. Ran regional events and managed the organisation's website and volunteer database.</span><span class="e-dates">Feb 2017 - Jul 2019</span></li>
-            <li><span class="e-main"><b>Rootsapp</b>, Python Developer Intern. Prototyped with Deep Learning and VR as a Python developer.</span><span class="e-dates">May 2018 - Aug 2018</span></li>
-            <li><span class="e-main"><b>Indian Oil Corporation</b>, Android Developer Trainee. Rebuilt the Android app used to manage employee contacts at the Barauni refinery.</span><span class="e-dates">Jun 2018 - Jul 2018</span></li>
-          </ul>
-        </section>
-
-        <!-- ===== PROJECTS ===== -->
-        <section id="projects">
-          <div class="hgroup"><h2>■ What's Hot</h2></div>
-          <ul class="proj-list">
-            <li><b>Aegis</b><span class="new">NEW!</span>: A distributed API gateway and web-application firewall that terminates mTLS and sustains 2M+ requests per second at the edge. Per-identity adaptive rate limiting plus an ML anomaly detector that shuts down credential stuffing and Layer-7 DDoS in real time. Zero-trust by default. <i>(Rust, eBPF, Envoy)</i></li>
-
-            <li><b>Smart SAST</b><span class="new">NEW!</span>: A deterministic security scanner that catches AI-generated code flaws and OWASP Top 10 vulnerabilities before they reach production. Scans 1M+ lines of code in seconds, fully offline: no cloud, no phone-home, safe for regulated codebases. <i>(Rust)</i></li>
-
-            <li><b>Helios</b>: A globally distributed, multi-region event pipeline moving 10B+ events per day with exactly-once delivery and end-to-end encryption. Backpressure-aware, self-healing partitions, and sub-100ms p99 across regions. <i>(Go, Kafka, gRPC)</i></li>
-
-            <li><b>Human Protocol</b>: A privacy-preserving protocol that shields high-demand flows such as ticketing and flash sales from bots by making abuse economically unviable, without CAPTCHAs or tracking. Cut automated traffic by 98% in load tests while leaving real users untouched. <i>(Rust)</i></li>
-
-            <li><b>Sentinel</b>: A zero-trust secrets plane that issues short-lived, auto-rotating credentials over mTLS with hardware-backed (HSM) keys, a tamper-evident audit trail, and SOC 2 / HIPAA-ready policy controls. Retires long-lived API keys for good. <i>(Rust, SPIFFE/SPIRE)</i></li>
-
-            <li><b>Observability Agent</b>: A Kubernetes-native observability and management agent that ingests millions of spans, metrics, and logs per second per node with near-zero overhead, for real-time telemetry and orchestration across the whole cluster. <i>(Rust, Go, Python)</i></li>
-
-            <li><b>Persistent Cache-DB</b>: A crash-safe key/value store sustaining 320M reads per second via memory-mapped I/O and a custom, cache-line-aligned binary format. Zero syscalls on the hot path. <i>(Rust)</i></li>
-
-            <li><b>Rusty OS</b>: A custom operating system built from scratch in Rust, with a bespoke kernel, bootloader, paging, and a cooperative scheduler. <i>(Rust)</i></li>
-
-            <li><b>File Drop</b>: Decentralised, end-to-end encrypted file storage on Ethereum smart contracts and IPFS. The client encrypts with AES before anything leaves the browser, so the server never sees plaintext. <i>(Solidity, IPFS)</i></li>
-
-            <li><b>Lazy Script</b>: A custom interpreter for a small scripting language, with a hand-rolled lexer, Pratt parser, and tree-walking evaluator supporting closures and first-class functions. <i>(Python)</i></li>
-
-            <li><b>FlowX</b>: A no-code platform for building business workflows with a drag-and-drop UI and a horizontally scalable, real-time execution engine. Every run is versioned and replayable. <i>(Node, React)</i></li>
-
-            <li><b>The Uprising</b>: A browser mini-game where you play as the ball. Roll, dodge, and jump to survive the humans trying to catch you, with power-ups and a few distinct enemy behaviours. Play at <a href="https://theuprising.arpitsharma.io" rel="noopener noreferrer">theuprising.arpitsharma.io</a>. <i>(JavaScript, Canvas)</i></li>
-          </ul>
-        </section>
-
-        <!-- ===== ARCADE ===== -->
-        <section id="arcade">
-          <div class="hgroup"><h2>■ The Arcade</h2></div>
-          <div class="arcade-grid">
-            <div class="game-shell">
-              <p class="game-title">🐍 SNAKE '97</p>
-              <canvas id="snakeCanvas" width="320" height="240"></canvas>
-              <div class="game-hud"><span id="snakeScore">SCORE 0000</span><span id="snakeHi">HI 0000</span></div>
-              <button id="snakeStart" type="button" class="btn95">▶ INSERT COIN</button>
-              <div class="dpad">
-                <button type="button" class="btn95" data-dir="up" aria-label="Up">▲</button>
-                <div>
-                  <button type="button" class="btn95" data-dir="left" aria-label="Left">◀</button>
-                  <button type="button" class="btn95" data-dir="down" aria-label="Down">▼</button>
-                  <button type="button" class="btn95" data-dir="right" aria-label="Right">▶</button>
-                </div>
-              </div>
-              <p class="game-note">arrow keys / WASD · high score lives in your browser</p>
-            </div>
-            <div class="game-shell">
-              <p class="game-title">🧱 BREAKOUT '97</p>
-              <canvas id="breakCanvas" width="320" height="240"></canvas>
-              <div class="game-hud"><span id="breakScore">SCORE 0000</span><span id="breakLives">—</span><span id="breakHi">HI 0000</span></div>
-              <button id="breakStart" type="button" class="btn95">▶ INSERT COIN</button>
-              <p class="game-note">mouse or ← → keys · free the bricks</p>
-            </div>
-            <div class="game-shell">
-              <p class="game-title">🎱 THE DEV ORACLE</p>
-              <p class="game-note">All-knowing. Occasionally compiling. Ask it about your code.</p>
-              <button id="oracleBtn" type="button" class="btn95">CONSULT THE ORACLE</button>
-              <p id="oracleOut" class="oracle-out"></p>
-              <p class="game-title later">🕹 THE UPRISING</p>
-              <p class="game-note">My full browser game: you play as the ball, humans try to catch you.<br /><a href="https://theuprising.arpitsharma.io" rel="noopener noreferrer">Play at theuprising.arpitsharma.io &rarr;</a></p>
-              <p class="game-note">psst… try <b>↑ ↑ ↓ ↓ ← → ← → B A</b> anywhere on this page.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== WRITING ===== -->
-        <section id="writing">
-          <div class="hgroup"><h2>■ Writing</h2></div>
-          <p>Notes on engineering, security, and the AI hype cycle. The live feed is on <a href="https://www.linkedin.com/in/lazycoderr/recent-activity/all/" rel="noopener noreferrer">LinkedIn</a>. A few recent ones:</p>
-          <ul class="writing-list">
-            <li><span class="when">Aug 2026</span><a href="https://www.linkedin.com/in/lazycoderr/recent-activity/all/" rel="noopener noreferrer">Vibe-coded, unreviewed, and one step from real users</a><span class="new">NEW!</span></li>
-            <li><span class="when">Jul 2026</span><a href="https://www.linkedin.com/in/lazycoderr/recent-activity/all/" rel="noopener noreferrer">Why low-level knowledge matters more now, not less</a></li>
-            <li><span class="when">Dec 2025</span><a href="https://www.linkedin.com/in/lazycoderr/recent-activity/all/" rel="noopener noreferrer">How a single <code>unwrap()</code> took down half the internet</a></li>
-          </ul>
-          <p><a href="https://www.linkedin.com/in/lazycoderr/recent-activity/all/" rel="noopener noreferrer">Read all writing on LinkedIn &rarr;</a></p>
-        </section>
-
-        <!-- ===== EDUCATION ===== -->
-        <section id="education">
-          <div class="hgroup"><h2>■ Education</h2></div>
-          <p class="job-head">
-            <span class="title"><b>B.Tech, Computer Science and Engineering</b> · Dr. A.P.J. Abdul Kalam Technical University</span>
-            <span class="dates">2016 - 2020 · 82%</span>
-          </p>
-        </section>
-
-        <!-- ===== LANGUAGES ===== -->
-        <section id="languages">
-          <div class="hgroup"><h2>■ Languages</h2></div>
-          <p>English (Professional) &nbsp;·&nbsp; Hindi (Native)</p>
-        </section>
-      </main>
-    </div>
-
-    <footer>
-      <div class="construction"><span class="blink">🚧 THIS HOMEPAGE IS ALWAYS UNDER CONSTRUCTION 🚧</span></div>
-      <p class="visitor">You are visitor <span id="counter" class="counter"></span> since <s>1997</s></p>
-      <p class="visitor">server uptime: <span id="uptime"></span> · zero reboots</p>
-      <p class="webring">— proud member of the <b>Distributed Systems WebRing</b> — <a href="https://linkedin.com/in/lazycoderr" rel="noopener noreferrer">&laquo; prev</a> · <a href="https://github.com/OrignalLazyCoder?tab=repositories" rel="noopener noreferrer">random</a> · <a href="https://theuprising.arpitsharma.io" rel="noopener noreferrer">next &raquo;</a> —</p>
-      <div class="badges" aria-hidden="true">
-        <span class="badge b-netscape">Best viewed<br />Netscape 4.0</span>
-        <span class="badge b-rust">Rust<br />inside&trade;</span>
-        <span class="badge b-vim">Powered<br />by Vim</span>
-        <span class="badge b-y2k">Y2K<br />compliant</span>
-        <span class="badge b-res">800&times;600<br />hi-res ready</span>
-        <span class="badge b-html">99.9%<br />uptime</span>
-      </div>
-      <p class="fine">
-        &copy; <s>1997</s> 2026 Arpit Sharma · Bengaluru, India · <a href="mailto:hello@arpitsharma.io">hello@arpitsharma.io</a> · <a href="https://www.linkedin.com/in/lazycoderr/recent-activity/all/" rel="noopener noreferrer">Writing</a>
+    <!-- ===== SUMMARY ===== -->
+    <section id="summary">
+      <h2>Summary</h2>
+      <p class="summary">
+        Full-stack and distributed-systems engineer with 7 years across backend, frontend, and
+        cloud infrastructure. I architect scalable systems and cloud-native platforms that cut
+        costs, lift conversion, and hold 99.9%+ uptime at scale, from the data model up to the
+        React on top. I also work close to the business: presales engineering, client demos and
+        proofs-of-concept, and data-security initiatives. I have a deep interest in systems
+        programming and low-level performance (Rust, kernels, memory-mapped I/O), and a habit of
+        shipping production-grade software that ties engineering execution to measurable business
+        impact. Comfortable from the kernel to the sales call.
       </p>
-    </footer>
+    </section>
 
-    <div class="statusbar" aria-hidden="true">
-      <span id="statusText">Document: Done</span>
-      <span class="ssl">🔒 secure · best at 800×600 · 28.8kbps OK</span>
-    </div>
+    <!-- ===== SKILLS ===== -->
+    <section id="skills" class="skills">
+      <h2>Skills</h2>
+      <p><b>Languages:</b> Go, Rust, TypeScript, JavaScript, Java, C#, Python, SQL, Bash</p>
+      <p><b>Backend:</b> Node.js, NestJS, Spring Boot, .NET, Django, FastAPI, gRPC, GraphQL, REST</p>
+      <p><b>Frontend:</b> React, Next.js, Angular, Vue, Redux, TailwindCSS</p>
+      <p><b>Data &amp; Messaging:</b> PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch, Kafka, RabbitMQ</p>
+      <p><b>Cloud &amp; DevOps:</b> AWS, GCP, Azure, Kubernetes, Docker, Terraform, ArgoCD, Jenkins</p>
+      <p><b>Security:</b> Zero-trust, mTLS, SAST, OWASP Top 10, HIPAA &amp; SOC 2, secrets management</p>
+      <p><b>Observability:</b> Prometheus, Grafana, OpenTelemetry, Datadog, ELK</p>
+      <p><b>Blockchain &amp; Web3:</b> Solidity, Ethereum, Smart Contracts, IPFS</p>
+    </section>
 
-    <div id="clippy" class="clippy" hidden>
-      <div class="clippy-bubble">
-        <p><b>It looks like you're trying to hire a full stack engineer.</b></p>
-        <p>Would you like help with that?</p>
-        <div class="clippy-btns">
-          <a class="btn95" href="mailto:hello@arpitsharma.io">YES, EMAIL HIM</a>
-          <button id="clippyNo" type="button" class="btn95">NO THANKS</button>
-        </div>
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience">
+      <h2>Experience</h2>
+
+      <div class="job">
+        <p class="job-head">
+          <span class="title"><b><a href="https://www.motorolasolutions.com/" rel="noopener noreferrer">Motorola Solutions</a></b></span>
+          <span class="dates">Bengaluru, India · Hybrid</span>
+        </p>
+        <p class="role"><span class="rtitle">Software Engineer</span><span class="rdates">Jul 2026 - Present</span></p>
+        <ul>
+          <li>Lead engineering projects that keep production systems running smoothly and data safe across teams.</li>
+          <li>Drive presales engineering, partnering with sales teams to design technical solutions and demonstrate product capabilities to prospective clients.</li>
+          <li>Lead data-security initiatives, implementing safeguards and best practices to protect sensitive information across internal systems.</li>
+          <li>Design and build internal tools in Python and Go, automating manual workflows and improving team productivity.</li>
+          <li>Architect and deploy cloud-native solutions on Microsoft Azure for scalability and reliability.</li>
+          <li>Develop AI-powered features and integrations that enhance internal tooling and decision-making.</li>
+        </ul>
       </div>
-      <div class="clippy-guy" aria-hidden="true">📎</div>
-    </div>
 
-    <div id="winner" class="winpop" hidden>
-      <div class="winpop-title"><span>❗ WINNER.EXE</span><button id="winnerClose" type="button" aria-label="Close">✕</button></div>
-      <div class="winpop-body" id="winnerBody">
-        <p class="blink"><b>CONGRATULATIONS!</b></p>
-        <p>You are the <b>1,000,000th</b> visitor to this homepage!!</p>
-        <button id="winnerClaim" type="button" class="btn95">CLAIM PRIZE</button>
+      <div class="job">
+        <p class="job-head">
+          <span class="title"><b><a href="https://www.angara.com/in-en" rel="noopener noreferrer">Angara Ecommerce</a></b></span>
+          <span class="dates">Noida, India · On-site</span>
+        </p>
+        <p class="role"><span class="rtitle">Software Engineering Manager</span><span class="rdates">Aug 2025 - Jul 2026</span></p>
+        <ul>
+          <li>Own the tech platform for a global fine-jewellery ecommerce company, covering personalisation, product customisation, payments, and fulfilment, plus the infrastructure beneath it.</li>
+          <li>Led a re-architecture of 10+ core commerce modules; carried 2&times; traffic growth with no loss of performance and cut AWS costs 30% via rightsizing and reserved capacity.</li>
+          <li>Designed low-latency, high-throughput backends using caching, async processing, and optimised data-access patterns, sustaining 99.9% uptime across AWS and GCP through peak retail.</li>
+          <li>Ran the platform on EKS and GKE with Helm, ArgoCD, and Terraform, standardising deployments and improving release velocity.</li>
+          <li>Drove conversion-rate optimisation that moved conversion from 12% to 18% across the main purchase funnels, lifting revenue and average order value.</li>
+          <li>Lead 3 cross-functional teams: set the technical roadmap, run architecture reviews, mentor senior engineers, and validate decisions by writing core backend code myself.</li>
+        </ul>
+        <p class="stack-line"><b>Stack:</b> Node.js · TypeScript · Postgres · Redis · Kafka · Kubernetes · AWS · GCP</p>
       </div>
-    </div>
 
-    <script src="retro.js?v=6"></script>
+      <div class="job">
+        <p class="job-head">
+          <span class="title"><b><a href="https://mavq.com/" rel="noopener noreferrer">mavQ</a></b> (formerly <a href="https://www.mtxb2b.com/s/" rel="noopener noreferrer">MTX Group</a>)</span>
+          <span class="dates">Jaipur / Remote · 4 yrs 5 mos</span>
+        </p>
+        <p class="role"><span class="rtitle">Senior Software Engineer</span><span class="rdates">Apr 2023 - Aug 2025 · Remote</span></p>
+        <ul>
+          <li>Worked mostly on enterprise platforms for US state-government clients and large organisations under HIPAA and SOC 2, where correctness and auditability were non-negotiable.</li>
+          <li>Built a distributed document-processing and indexing stack (high-ingest, low-latency querying) that became the foundation for case-management platforms with AI-powered search, workflow automation, reporting, and call-centre integration.</li>
+          <li>Owned architecture and scoping on multiple multi-million-dollar projects; during presales, ran proofs-of-concept, put together technical estimates, and presented directly to clients and stakeholders.</li>
+          <li>Mentored engineers on the team, ran technical interviews, and was on-call for the systems I built.</li>
+        </ul>
+        <p class="role"><span class="rtitle">Software Engineer</span><span class="rdates">Apr 2021 - Apr 2023 · Jaipur (Hybrid)</span></p>
+        <ul>
+          <li>Contributed to 25+ products for clients across India, the US, and Canada, picking up new stacks quickly across NestJS, Loopback4, Angular, React, React Native, Go, .NET, and Django.</li>
+          <li>Developed internal tooling that automated repetitive parts of the development process and helped the team ship faster.</li>
+          <li>Got involved in presales too, responding to RFPs, running demos, and writing technical proposals, which connected engineering decisions to business and client expectations.</li>
+        </ul>
+        <p class="stack-line"><b>Stack:</b> Java · Spring · Python · Go · React · Angular · ElasticSearch · MongoDB · AWS · Azure</p>
+      </div>
+
+      <div class="job">
+        <p class="job-head">
+          <span class="title"><b><a href="https://www.impledge.com/" rel="noopener noreferrer">Impledge Technologies</a></b></span>
+          <span class="dates">Noida, India · 1 yr 4 mos</span>
+        </p>
+        <p class="role"><span class="rtitle">Associate Software Engineer</span><span class="rdates">Aug 2020 - Apr 2021</span></p>
+        <ul>
+          <li>My first engineering job and the year I learned the most: shipped client-facing products on weekly cycles across ASP.NET, Angular, React, NestJS, and Azure.</li>
+          <li>Started as a trainee and grew into the associate role by owning work end to end, understanding requirements, testing my own changes, and seeing things through to deployment.</li>
+          <li>Built the engineering habits I still rely on: reading existing code carefully, debugging properly, and not shipping something I don't understand.</li>
+        </ul>
+        <p class="role"><span class="rtitle">Trainee Software Engineer</span><span class="rdates">Jan 2020 - Aug 2020</span></p>
+      </div>
+
+      <p class="subhead">Earlier &amp; community</p>
+      <ul class="earlier">
+        <li><span class="e-main"><b>DownBeat</b>, Founder (Self-employed). A not-for-profit mental-health support community I started and ran for over three years, building and maintaining all of the technology myself.</span><span class="e-dates">Oct 2017 - Jan 2021</span></li>
+        <li><span class="e-main"><b>Indian Oil Corporation</b>, Network Engineer Trainee. Built a device-monitoring tool for the refinery's private network; adopted plant-wide and recognised with a formal DGM letter of appreciation.</span><span class="e-dates">Jun 2019 - Aug 2019</span></li>
+        <li><span class="e-main"><b>Helping Brainz</b>, Chapter Leader &amp; Web / DB Lead. Ran regional events and managed the organisation's website and volunteer database.</span><span class="e-dates">Feb 2017 - Jul 2019</span></li>
+        <li><span class="e-main"><b>Rootsapp</b>, Python Developer Intern. Prototyped with Deep Learning and VR as a Python developer.</span><span class="e-dates">May 2018 - Aug 2018</span></li>
+        <li><span class="e-main"><b>Indian Oil Corporation</b>, Android Developer Trainee. Rebuilt the Android app used to manage employee contacts at the Barauni refinery.</span><span class="e-dates">Jun 2018 - Jul 2018</span></li>
+      </ul>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul class="proj-list">
+        <li><b>Aegis</b>: A distributed API gateway and web-application firewall that terminates mTLS and sustains 2M+ requests per second at the edge. Per-identity adaptive rate limiting plus an ML anomaly detector that shuts down credential stuffing and Layer-7 DDoS in real time. Zero-trust by default. <i>(Rust, eBPF, Envoy)</i></li>
+
+        <li><b>Smart SAST</b>: A deterministic security scanner that catches AI-generated code flaws and OWASP Top 10 vulnerabilities before they reach production. Scans 1M+ lines of code in seconds, fully offline: no cloud, no phone-home, safe for regulated codebases. <i>(Rust)</i></li>
+
+        <li><b>Helios</b>: A globally distributed, multi-region event pipeline moving 10B+ events per day with exactly-once delivery and end-to-end encryption. Backpressure-aware, self-healing partitions, and sub-100ms p99 across regions. <i>(Go, Kafka, gRPC)</i></li>
+
+        <li><b>Human Protocol</b>: A privacy-preserving protocol that shields high-demand flows such as ticketing and flash sales from bots by making abuse economically unviable, without CAPTCHAs or tracking. Cut automated traffic by 98% in load tests while leaving real users untouched. <i>(Rust)</i></li>
+
+        <li><b>Sentinel</b>: A zero-trust secrets plane that issues short-lived, auto-rotating credentials over mTLS with hardware-backed (HSM) keys, a tamper-evident audit trail, and SOC 2 / HIPAA-ready policy controls. Retires long-lived API keys for good. <i>(Rust, SPIFFE/SPIRE)</i></li>
+
+        <li><b>Observability Agent</b>: A Kubernetes-native observability and management agent that ingests millions of spans, metrics, and logs per second per node with near-zero overhead, for real-time telemetry and orchestration across the whole cluster. <i>(Rust, Go, Python)</i></li>
+
+        <li><b>Persistent Cache-DB</b>: A crash-safe key/value store sustaining 320M reads per second via memory-mapped I/O and a custom, cache-line-aligned binary format. Zero syscalls on the hot path. <i>(Rust)</i></li>
+
+        <li><b>Rusty OS</b>: A custom operating system built from scratch in Rust, with a bespoke kernel, bootloader, paging, and a cooperative scheduler. <i>(Rust)</i></li>
+
+        <li><b>File Drop</b>: Decentralised, end-to-end encrypted file storage on Ethereum smart contracts and IPFS. The client encrypts with AES before anything leaves the browser, so the server never sees plaintext. <i>(Solidity, IPFS)</i></li>
+
+        <li><b>Lazy Script</b>: A custom interpreter for a small scripting language, with a hand-rolled lexer, Pratt parser, and tree-walking evaluator supporting closures and first-class functions. <i>(Python)</i></li>
+
+        <li><b>FlowX</b>: A no-code platform for building business workflows with a drag-and-drop UI and a horizontally scalable, real-time execution engine. Every run is versioned and replayable. <i>(Node, React)</i></li>
+
+        <li><b>The Uprising</b>: A browser mini-game where you play as the ball. Roll, dodge, and jump to survive the humans trying to catch you, with power-ups and a few distinct enemy behaviours. Play at <a href="https://theuprising.arpitsharma.io" rel="noopener noreferrer">theuprising.arpitsharma.io</a>. <i>(JavaScript, Canvas)</i></li>
+      </ul>
+    </section>
+
+    <!-- ===== WRITING ===== -->
+    <section id="writing">
+      <h2>Writing</h2>
+      <p>Notes on engineering, security, and the AI hype cycle. The live feed is on <a href="https://www.linkedin.com/in/lazycoderr/recent-activity/all/" rel="noopener noreferrer">LinkedIn</a>. A few recent ones:</p>
+      <ul class="writing-list">
+        <li><span class="when">Aug 2026</span><a href="writing.html">Vibe-coded, unreviewed, and one step from real users</a></li>
+        <li><span class="when">Jul 2026</span><a href="writing.html">Why low-level knowledge matters more now, not less</a></li>
+        <li><span class="when">Dec 2025</span><a href="writing.html">How a single <code>unwrap()</code> took down half the internet</a></li>
+      </ul>
+      <p><a href="writing.html">Read all writing &rarr;</a></p>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education">
+      <h2>Education</h2>
+      <p class="job-head">
+        <span class="title"><b>B.Tech, Computer Science and Engineering</b> · Dr. A.P.J. Abdul Kalam Technical University</span>
+        <span class="dates">2016 - 2020 · 82%</span>
+      </p>
+    </section>
+
+    <!-- ===== LANGUAGES ===== -->
+    <section id="languages">
+      <h2>Languages</h2>
+      <p>English (Professional) &nbsp;·&nbsp; Hindi (Native)</p>
+    </section>
+
+    <footer>© 2026 Arpit Sharma · Bengaluru, India · <a href="mailto:hello@arpitsharma.io">hello@arpitsharma.io</a> · <a href="writing.html">Writing</a></footer>
+
+    <script>
+      (function () {
+        var shareBtn = document.getElementById("shareBtn");
+        shareBtn.addEventListener("click", async function () {
+          var url = location.href;
+          var data = { title: "Arpit Sharma", text: "Arpit Sharma, Full-Stack & Distributed-Systems Engineer", url: url };
+          if (navigator.share) {
+            try { await navigator.share(data); } catch (e) {}
+          } else if (navigator.clipboard) {
+            try {
+              await navigator.clipboard.writeText(url);
+              var t = shareBtn.textContent;
+              shareBtn.textContent = "Link copied";
+              setTimeout(function () { shareBtn.textContent = t; }, 1500);
+            } catch (e) {}
+          }
+        });
+      })();
+    </script>
 
     <script type="application/ld+json">
       {
